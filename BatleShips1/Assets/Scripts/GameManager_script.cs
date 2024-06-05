@@ -29,6 +29,7 @@ public class GameManager_script : MonoBehaviour
     [SerializeField] GameObject playerShips;
     [SerializeField] GameObject enemyShips;
     [SerializeField] GameObject Hit_miss_anim_obj;
+    [SerializeField] GameObject Bullet_obj;
 
     [SerializeField] Button startGame_btn;
     [SerializeField] Button random_btn;
@@ -251,38 +252,50 @@ public class GameManager_script : MonoBehaviour
     {
         if (Cube.GetComponent<Cube_script>().wasShot == false)
         {
-            //Debug.Log("Player is shooting on " + Cube.transform.position);
-            if (Cube.GetComponent<Cube_script>().hitTheTarget())
-            {
-                playerMove = true;
-                enemyMove = false;
-                Cube.GetComponent<Cube_script>().wasShot = true;
-                Cube.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            shootRocket(Cube);
 
-                HitEnemyShip(Cube.transform.position);
-
-                GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
-                Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Hit", true);
-                Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
-
-            }
-            else
-            {
-
-                playerMove = false;
-                enemyMove = true;
-
-                Cube.GetComponent<Cube_script>().wasShot = true;
-                GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
-                Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Miss", true);
-                Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
-
-                EnemyShootsToPlayer();
-
-            }
+            
         }
         
 
+    }
+
+    public void shootRocket(GameObject Cube)
+    {
+        GameObject bullet = Instantiate(Bullet_obj, new Vector3(0, 0, 0), Quaternion.identity);
+        bullet.GetComponent<bullet_script>().targetPosition = Cube.transform.position;
+    }
+
+    public void HitOrMissTarget(GameObject Cube)
+    {
+        if (Cube.GetComponent<Cube_script>().hitTheTarget())
+        {
+            playerMove = true;
+            enemyMove = false;
+            Cube.GetComponent<Cube_script>().wasShot = true;
+            Cube.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+            HitEnemyShip(Cube.transform.position);
+
+            GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
+            Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Hit", true);
+            Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
+
+        }
+        else
+        {
+
+            playerMove = false;
+            enemyMove = true;
+
+            Cube.GetComponent<Cube_script>().wasShot = true;
+            GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
+            Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Miss", true);
+            Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
+
+            EnemyShootsToPlayer();
+
+        }
     }
 
 
