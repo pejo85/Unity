@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 
 
-// [] Cover enemy grid with fog
+// [] Cover enemy grid with fog...
 // [X] Player ship rotation on click
 
 /*   
