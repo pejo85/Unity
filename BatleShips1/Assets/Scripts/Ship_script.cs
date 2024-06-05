@@ -416,7 +416,9 @@ public class Ship_script : MonoBehaviour
 
     public void destroyShip()
     {
-        Destroy(gameObject);
+        // 
+        this.transform.SetParent(GameObject.Find("DestroyedShips").transform);
+        //Destroy(gameObject);
         //Debug.Log("Ship was destroyed...");
     }
 

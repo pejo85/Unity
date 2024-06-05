@@ -62,6 +62,7 @@ public class Grid_script : MonoBehaviour
                 grid_list_enemy[x, y] = Instantiate(Cube, new Vector2(x + distanceBetweenGrids, y), Quaternion.identity);
                 grid_list_enemy[x, y].transform.SetParent(GameObject.Find("Grid").transform);
                 grid_list_enemy[x, y].GetComponent<Cube_script>().isEnemyBoard = true;
+                grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 5;
             }
         }
     }
@@ -84,14 +85,12 @@ public class Grid_script : MonoBehaviour
 
     public void EnablePlayerGrid()
     {
-        Debug.Log(grid_list_player.Length);
         foreach (GameObject cube in grid_list_player)
         {
             if (cube != null)
             {
                 cube.SetActive(true);
             }
-            
         }
     }
 
@@ -257,28 +256,6 @@ public class Grid_script : MonoBehaviour
         
     }
 
-    // Temp for debugging
-    public int checkIfGridCubeIsOcupied()
-    {
-        int totalNumOfOcupiedPos = 0;
-        foreach (GameObject Cube in grid_list_enemy)
-        {
-            if (Cube.GetComponent<Cube_script>().isOcupied)
-            {
-                totalNumOfOcupiedPos++;
-            }
-        }
-
-        foreach (GameObject Cube in grid_list_player)
-        {
-            if (Cube.GetComponent<Cube_script>().isOcupied)
-            {
-                totalNumOfOcupiedPos++;
-            }
-        }
-        return totalNumOfOcupiedPos;
-    }
-
     public void resetGrid()
     {
         // Reset Player grid
@@ -306,14 +283,14 @@ public class Grid_script : MonoBehaviour
         }
     }
 
-    public void changeGridCubeColors(Vector2[] shipAllPos, Color color1)
-    {
-        for (int i = 0; i < shipAllPos.Length; i++)
-        {
-            Debug.Log(shipAllPos[1] + "," + color1);
-            grid_list_player[(int)shipAllPos[i].x, (int)shipAllPos[i].y].gameObject.GetComponent<SpriteRenderer>().color = color1;
-        }
-    }
+    //public void changeGridCubeColors(Vector2[] shipAllPos, Color color1)
+    //{
+    //    for (int i = 0; i < shipAllPos.Length; i++)
+    //    {
+    //        Debug.Log(shipAllPos[1] + "," + color1);
+    //        grid_list_player[(int)shipAllPos[i].x, (int)shipAllPos[i].y].gameObject.GetComponent<SpriteRenderer>().color = color1;
+    //    }
+    //}
 
 
 

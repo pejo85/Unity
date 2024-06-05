@@ -51,6 +51,9 @@ public class GameManager_script : MonoBehaviour
     public bool playerMove = false;
     public bool enemyMove = false;
     public bool shipIsStillAlive = false;
+    private bool potencialShipAllignmentIsHorisontal = true;
+    [SerializeField] public List<Vector2> potencialShootingPosList = new List<Vector2>();
+    public List<Vector2> previousSuccessfullHitList = new List<Vector2>();
 
     //public Animator animator;
 
@@ -67,9 +70,8 @@ public class GameManager_script : MonoBehaviour
 
         CreateShootingRangeList();
 
-        //shootingLogic();
     }
-
+    // activates from Button
     public void StartGame()
     {
         grid_script.EnableEnemyGrid();
@@ -115,15 +117,15 @@ public class GameManager_script : MonoBehaviour
         }
     }
 
-    private void ShipLengthBlocksPosCalculate()
-    {
-        Vector2 pos = Utility_script.round_pos(transform.position);
-
-        foreach (Transform playerShip in playerShips.transform)
-        {
-            playerShip.GetComponent<Ship_script>().shipAllPosCalculate(pos);
-        }
-    }
+    //private void ShipLengthBlocksPosCalculate()
+    //{
+    //    Vector2 pos = Utility_script.round_pos(transform.position);
+    //
+    //    foreach (Transform playerShip in playerShips.transform)
+    //    {
+    //        playerShip.GetComponent<Ship_script>().shipAllPosCalculate(pos);
+    //    }
+    //}
 
     public void PlaceEnemyShipsRandomly()
     {
@@ -136,6 +138,7 @@ public class GameManager_script : MonoBehaviour
         }
     }
 
+    // activates from Button
     public void PlacePlayerShipsRandomly()
     {
         ResetShipDeployment();
@@ -246,29 +249,39 @@ public class GameManager_script : MonoBehaviour
 
     public void PlayerShootsToEnemy(GameObject Cube)
     {
-        //Debug.Log("Player is shooting on " + Cube.transform.position);
-        if (Cube.GetComponent<Cube_script>().hitTheTarget() )
+        if (Cube.GetComponent<Cube_script>().wasShot == false)
         {
-            playerMove = true;
-            enemyMove = false;
-            HitEnemyShip(Cube.transform.position);
+            //Debug.Log("Player is shooting on " + Cube.transform.position);
+            if (Cube.GetComponent<Cube_script>().hitTheTarget())
+            {
+                playerMove = true;
+                enemyMove = false;
+                Cube.GetComponent<Cube_script>().wasShot = true;
+                Cube.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
-            GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
-            Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Hit", true);
+                HitEnemyShip(Cube.transform.position);
 
+                GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
+                Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Hit", true);
+                Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
+
+            }
+            else
+            {
+
+                playerMove = false;
+                enemyMove = true;
+
+                Cube.GetComponent<Cube_script>().wasShot = true;
+                GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
+                Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Miss", true);
+                Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
+
+                EnemyShootsToPlayer();
+
+            }
         }
-        else
-        {
-            playerMove = false;
-            enemyMove = true;
-
-            //Cube.GetComponent<Cube_script>().Animate();
-            GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
-            Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Miss", true);
-
-            EnemyShootsToPlayer();
-            
-        }
+        
 
     }
 
@@ -285,180 +298,6 @@ public class GameManager_script : MonoBehaviour
      
      
      */
-
-
-
-    [SerializeField] public List<Vector2> potencialShootingPosList = new List<Vector2>();
-    public List<Vector2> previousSuccessfullHitList = new List<Vector2>();
-
-    //public void EnemyShootsToPlayer()
-    //{
-    //    int shootRandomX;
-    //    int shootRandomY;
-    //    int randomNum = Utility_script.random_num(0, shootingRangeList.Count); // (1,2)
-    //
-    //    Debug.Log("previousSuccessfullHitList.Count = " + previousSuccessfullHitList.Count);
-    //
-    //    // If it is new shot , Shoot randomly from shootingRangeList positions
-    //    if (previousSuccessfullHitList.Count == 0)
-    //    {
-    //        shootRandomX = (int)shootingRangeList[randomNum].x;
-    //        shootRandomY = (int)shootingRangeList[randomNum].y;
-    //    }
-    //    // If ship is already hit and needs to finish it
-    //    else
-    //    {
-    //
-    //
-    //        checkIfIsInsideShootingList(potencialShootingPosList);
-    //        
-    //
-    //        randomNum = Utility_script.random_num(0, potencialShootingPosList.Count); // (1,2)
-    //
-    //        // if these coordinates are not present in shootingRangeList[], then remove it from potencialShootingPosList[] as well
-    //
-    //
-    //
-    //        shootRandomX = (int)potencialShootingPosList[randomNum].x; //TEMP
-    //        shootRandomY = (int)potencialShootingPosList[randomNum].y; //TEMP
-    //    }
-    //
-    //    // Debug.Log("potencialShootingPosList = " + potencialShootingPosList);
-    //
-    //    shootingRangeList.RemoveAt(randomNum);
-    //
-    //    GameObject Cube = grid_script.grid_list_player[shootRandomX, shootRandomY];
-    //
-    //    if (Cube.GetComponent<Cube_script>().hitTheTarget() )
-    //    {
-    //        playerMove = false;
-    //        enemyMove = true;
-    //        HitPlayerShip(Cube.transform.position);
-    //
-    //
-    //        potencialShootingPosList = ShootingNextPosList(new Vector2(shootRandomX, shootRandomY));
-    //
-    //
-    //        if (gameOver)
-    //        {
-    //            Debug.Log("Game over - Enemy WINS !!!");
-    //        }
-    //        // 
-    //        if ( shootingRangeList.Count > 0)
-    //        {
-    //            //Debug.Log("Remain 111 " + shootingRangeList.Count + " shots");
-    //            EnemyShootsToPlayer();
-    //        }
-    //        else
-    //        {
-    //            //Debug.Log("Remain 222 " + shootingRangeList.Count + " shots");
-    //            Debug.Log("Enemy WINS !!!");
-    //        }
-    //        
-    //    }
-    //    else
-    //    {
-    //        //Debug.Log("Remain 333 " + shootingRangeList.Count + " shots");
-    //
-    //        playerMove = true;
-    //        enemyMove = false;
-    //    }
-    //    
-    //}
-    //
-    //
-    //
-    //private List<Vector2> ShootingNextPosList(Vector2 hitPos)
-    //{
-    //    //List<Vector2> previousSuccessfullHitList = new List<Vector2>();
-    //    //List<Vector2> potencialShootingPosList = new List<Vector2>();
-    //
-    //    int hitX = (int)hitPos.x; int hitY = (int)hitPos.y;
-    //    //Vector2 hitPos = new Vector2(hitX,hitY);
-    //
-    //    if (shipIsStillAlive)
-    //    {   
-    //        // If it is first time hit
-    //        if (previousSuccessfullHitList.Count == 0)
-    //        {
-    //            previousSuccessfullHitList.Add(hitPos);
-    //            if ((hitX - 1) >= 0)
-    //            {
-    //                potencialShootingPosList.Add(new Vector2(hitX - 1, hitY));
-    //            }
-    //            if ((hitX + 1) < gridWidth)
-    //            {
-    //                potencialShootingPosList.Add(new Vector2(hitX + 1, hitY));
-    //            }
-    //            if ((hitY - 1) >= 0)
-    //            {
-    //                potencialShootingPosList.Add(new Vector2(hitX, hitY - 1));
-    //            }
-    //            if ((hitY + 1) < gridHeight)
-    //            {
-    //                potencialShootingPosList.Add(new Vector2(hitX, hitY + 1));
-    //            }
-    //        }
-    //        else if (previousSuccessfullHitList.Count > 0)
-    //        {
-    //            int prevX = (int)previousSuccessfullHitList[0].x;
-    //            int prevY = (int)previousSuccessfullHitList[0].y;
-    //
-    //            // Horizontal alignment
-    //            if (prevX != hitX)
-    //            {
-    //                if ((hitX - 1) >= 0)
-    //                {
-    //                    potencialShootingPosList.Add(new Vector2(hitX - 1, hitY));
-    //                }
-    //                if ((hitX + 1) <= gridWidth)
-    //                {
-    //                    potencialShootingPosList.Add(new Vector2(hitX + 1, hitY));
-    //                }
-    //
-    //            }
-    //            // Vertical alignment
-    //            else
-    //            {
-    //                if ((hitY - 1) >= 0)
-    //                {
-    //                    potencialShootingPosList.Add(new Vector2(hitX, hitY - 1));
-    //                }
-    //                if ((hitY + 1) <= gridHeight)
-    //                {
-    //                    potencialShootingPosList.Add(new Vector2(hitX, hitY + 1));
-    //                }
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Ship is sunk - what is next????????????");
-    //    }
-    //
-    //    //for (int i = 0; i < potencialShootingPosList.Count; i++)
-    //    //{
-    //    //    Debug.Log("potencialPosList[ " + i + " ] --- " + potencialShootingPosList[i]);
-    //    //}
-    //
-    //    return potencialShootingPosList;
-    //}
-    //
-    //public void checkIfIsInsideShootingList(List<Vector2> potencialShootingPosList)
-    //{
-    //    foreach (Vector2 possibleShot in potencialShootingPosList)
-    //    {
-    //        if (!shootingRangeList.Contains(possibleShot))
-    //        {
-    //            Debug.Log("Possible shot within range: " + possibleShot);
-    //
-    //            this.potencialShootingPosList.Remove(possibleShot);
-    //        }
-    //    }
-    //
-    //}
-
-
 
     public void EnemyShootsToPlayer()
     {
@@ -489,14 +328,14 @@ public class GameManager_script : MonoBehaviour
                 potencialShootingPosList.RemoveAt(randomIndex);
 
                 shootingRangeList.RemoveAt(shootingRangeList.IndexOf(shootPos));
-                Debug.Log("shooting at - " + shootPos);
+               // Debug.Log("shooting at - " + shootPos);
             }
             else
             {
                 int randomIndex = Random.Range(0, shootingRangeList.Count);
                 shootPos = shootingRangeList[randomIndex];
                 shootingRangeList.RemoveAt(randomIndex);
-                Debug.Log("shooting attt - " + shootPos);
+                //Debug.Log("shooting attt - " + shootPos);
             }
 
             GameObject Cube = grid_script.grid_list_player[(int)shootPos.x, (int)shootPos.y];
@@ -508,6 +347,7 @@ public class GameManager_script : MonoBehaviour
 
                 GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
                 Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Hit", true);
+                Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
 
                 // Only update hunting mode if ship is still alive
                 if (shipIsStillAlive)
@@ -534,6 +374,7 @@ public class GameManager_script : MonoBehaviour
                 Debug.Log("missed the target");
                 GameObject Hit_miss_anim_obj_current = Instantiate(Hit_miss_anim_obj, Cube.transform.position, Quaternion.identity);
                 Hit_miss_anim_obj_current.GetComponent<Animator>().SetBool("Miss", true);
+                Hit_miss_anim_obj_current.transform.SetParent(GameObject.Find("Animation_objects").transform);
                 playerMove = true;
                 enemyMove = false;
                 //yield return new WaitForSeconds(0.1f);
@@ -557,11 +398,11 @@ public class GameManager_script : MonoBehaviour
         //}
         else
         {
-            Debug.Log("Enemy WINS !!!");
+            // Do something
         }
     }
 
-    private bool potencialShipAllignmentIsHorisontal = true;
+    
     private List<Vector2> GetPotentialShootingPositions(Vector2 hitPos)
     {
         List<Vector2> potentialPositions = new List<Vector2>();
@@ -628,22 +469,21 @@ public class GameManager_script : MonoBehaviour
         return potentialPositions;
     }
 
-    private void addPotencialSeparateShipsPos()
-    {
-        int potencialShipsNum = previousSuccessfullHitList.Count;
-
-        if (potencialShipAllignmentIsHorisontal) // it was mistakenly tought by AI before and now it is time to correct
-        {
-            potencialShipAllignmentIsHorisontal = false;
-
-        }
-        else
-        {
-            potencialShipAllignmentIsHorisontal = true;
-        }
-
-    }
-
+    //private void addPotencialSeparateShipsPos()
+    //{
+    //    int potencialShipsNum = previousSuccessfullHitList.Count;
+    //
+    //    if (potencialShipAllignmentIsHorisontal) // it was mistakenly tought by AI before and now it is time to correct
+    //    {
+    //        potencialShipAllignmentIsHorisontal = false;
+    //
+    //    }
+    //    else
+    //    {
+    //        potencialShipAllignmentIsHorisontal = true;
+    //    }
+    //
+    //}
 
     private void AddPotentialPosition(List<Vector2> positions, int x, int y)
     {
@@ -658,10 +498,6 @@ public class GameManager_script : MonoBehaviour
             }
         }
     }
-
-
-
-
 
     public void HitEnemyShip(Vector2 bulletPos)
     {
@@ -682,7 +518,7 @@ public class GameManager_script : MonoBehaviour
                     }
                     else
                     {
-                        //ship_script.destroyShip();
+                        ship_script.destroyShip();
                         CheckIfAllShipsAreDestroyed(ship_script.isEnemy);
                     }
                 }
@@ -709,7 +545,7 @@ public class GameManager_script : MonoBehaviour
                     }
                     else
                     {
-                        //ship_script.destroyShip();
+                        ship_script.destroyShip();
                         CheckIfAllShipsAreDestroyed(ship_script.isEnemy);
                         shipIsStillAlive = false;
 
@@ -728,7 +564,7 @@ public class GameManager_script : MonoBehaviour
         if (isEnemy) 
         {
             int numOfShipsLeft = enemyShips.transform.childCount;
-            if (numOfShipsLeft < 2)
+            if (numOfShipsLeft == 0)
             {
                 GameIsOver();
             }
@@ -739,7 +575,7 @@ public class GameManager_script : MonoBehaviour
             int numOfShipsLeft = playerShips.transform.childCount;
 
             Debug.Log("Left " + numOfShipsLeft + " number of player ships");
-            if (numOfShipsLeft < 2)
+            if (numOfShipsLeft == 0)
             {
                 GameIsOver();
             }
@@ -749,11 +585,20 @@ public class GameManager_script : MonoBehaviour
 
     public void GameIsOver()
     {
-        Debug.Log("You WIN od Lost");
+        
         gameOver = true;
 
         playerMove = false;
         enemyMove = false;
+        if (playerShips.transform.childCount == 0)
+        {
+            Debug.Log("You Lost!!!");
+        }
+        else if (enemyShips.transform.childCount == 0)
+        {
+            Debug.Log("You Win!!!");
+        }
+
     }
 
 }
