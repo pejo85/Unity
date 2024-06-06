@@ -1,28 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 public class bullet_script : MonoBehaviour
 {
-    //[SerializeField] public GameObject GameManager;
-
     private GameManager_script gameManager_script;
 
     public Vector2 targetPosition;
     public float speed = 10f;
     private Rigidbody2D rb;
+    public bool isPlayerShot;
 
     void Start()
     {
         gameManager_script = GameObject.Find("GameManager").GetComponent<GameManager_script>();
-        //gameManager_script = GameManager.GetComponent<GameManager_script>();
 
         rb = GetComponent<Rigidbody2D>();
         ShootRocket();
     }
 
-
+    void Update()
+    {
+        RotateTowardsDirection();
+    }
 
     void ShootRocket()
     {
@@ -40,20 +40,47 @@ public class bullet_script : MonoBehaviour
         rb.rotation = angle;
     }
 
-    public bool BulletHitTarget(Vector2 collisionPos)
-        { 
-        return collisionPos == targetPosition;
-        }
-
-
+    void RotateTowardsDirection()
+    {
+        Vector2 direction = rb.velocity;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rb.rotation = angle;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (BulletHitTarget(collision.gameObject.transform.position))
+        if (collision != null)
         {
-            gameManager_script.HitOrMissTarget(collision.gameObject);
-            Destroy(gameObject);
+            //Debug.Log(collision.gameObject.name + " -- " + collision.transform.position);
+
+            if (gameManager_script != null)
+            {
+                if (BulletHitTarget(collision.gameObject.transform.position))
+                {
+                    if (gameManager_script.playerMove)
+                    {
+                        gameManager_script.PlayerHitOrMissTarget(collision.gameObject);
+                    }
+                    else
+                    {
+                        //Debug.Log(collision.name + " -zzz- " + collision.transform.position);
+                        gameManager_script.EnemyHitOrMissTarget(collision.gameObject, collision.transform.position);
+                    }
+                    //Debug.Log("xxxx");
+                    gameManager_script.bulletIsInTheAir = false;
+                    //Debug.Log("yyyy");
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                Debug.LogError("GameManager_script reference is null in bullet_script");
+            }
         }
     }
 
+    public bool BulletHitTarget(Vector2 collisionPos)
+    {
+        return collisionPos == targetPosition;
+    }
 }
