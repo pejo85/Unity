@@ -55,7 +55,7 @@ public class GameManager_script : MonoBehaviour
         grid_script.EnableEnemyGrid();
         PlaceEnemyShipsRandomly();
         DisableAllShipMovement();
-        DisableEnemyShipRigidBody();
+        DisableEveryShipRigidBody();
         random_btn.gameObject.SetActive(false);
         startGame_btn.gameObject.SetActive(false);
         gameStarted = true;
@@ -155,11 +155,15 @@ public class GameManager_script : MonoBehaviour
         }
     }
 
-    private void DisableEnemyShipRigidBody()
+    private void DisableEveryShipRigidBody()
     {
         foreach (Transform enemyShip in enemyShips.transform)
         {
             enemyShip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        foreach (Transform playerShip in playerShips.transform)
+        {
+            playerShip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
