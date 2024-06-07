@@ -45,6 +45,10 @@ public class Cube_script : MonoBehaviour
             neighbourList = gameManager_script.CalculateClickedCubesSateliteNeighbours(this.gameObject);
             gameManager_script.SateliteHoversOverTile(neighbourList);
         }
+        //if (!isEnemyBoard && gameManager_script.AllShipsAreReady && !gameStarted)
+        //{
+        //    CubeColor(Color.yellow);
+        //}
         
     }
 
@@ -54,7 +58,12 @@ public class Cube_script : MonoBehaviour
         {
             gameManager_script.SateliteHoversOverExitTile(neighbourList);
         }
-        
+        //if (!isEnemyBoard && gameManager_script.AllShipsAreReady && !gameStarted)
+        //{
+        //    CubeColor(Color.white);
+        //}
+
+
     }
 
     private void OnMouseDown()
@@ -178,6 +187,12 @@ public class Cube_script : MonoBehaviour
                 //GetComponent<SpriteRenderer>().color = Color.white;
             }
     }
+
+    public void CubeColor(Color color)
+    {
+        GetComponent<SpriteRenderer>().color = color;
+    }
+
 }
 
 

@@ -28,7 +28,7 @@ public class GameManager_script : MonoBehaviour
     public int distanceBetweenGrids = 10;
     private float waitTime = 1.0f;
 
-    private bool AllShipsAreReady = false;
+    public bool AllShipsAreReady = false;
     public bool gameStarted = false;
     public bool gameOver = false;
     public bool playerMove = false;
@@ -39,7 +39,15 @@ public class GameManager_script : MonoBehaviour
     [SerializeField] public List<Vector2> potencialShootingPosList = new List<Vector2>();
     public List<Vector2> previousSuccessfullHitList = new List<Vector2>();
 
+    /*
+       ship4 - dome scale: x:0.6 , y:0.3  , z:0
+       ship3 - dome scale: x:0.5 , y:0.3  , z:0
+       ship2 - dome scale: x:0.4 , y:0.25 , z:0
+       ship1 - dome scale: x:0.3 , y:0.25 , z:0
+     */
+
     public bool sateliteIsWatching ;
+    public bool settingAirDefense;
 
     private void Awake()
     {
@@ -66,6 +74,7 @@ public class GameManager_script : MonoBehaviour
         startGame_btn.gameObject.SetActive(false);
         gameStarted = true;
         playerMove = true;
+        settingAirDefense = false;
     }
 
     private void CreateShootingRangeList()
@@ -249,6 +258,35 @@ public class GameManager_script : MonoBehaviour
     public void sateliteClick()
     {
         sateliteIsWatching = true;
+    }
+
+    public void airDefenseClick()
+    {
+        settingAirDefense = true;
+    }
+
+    public void SettingAirDefense(Vector2[] shipAllPos, bool isHovering)
+    {
+        if (isHovering)
+        {
+            foreach (Vector2 cubePos in shipAllPos)
+            {
+                grid_script.grid_list_player[(int)cubePos.x, (int)cubePos.y].GetComponent<Cube_script>().CubeColor(Color.red);
+            }
+        }
+        else
+        {
+            foreach (Vector2 cubePos in shipAllPos)
+            {
+                grid_script.grid_list_player[(int)cubePos.x, (int)cubePos.y].GetComponent<Cube_script>().CubeColor(Color.white);
+            }
+        }
+        
+    }
+
+    public void SetAirDefence(Vector2[] shipAllPos)
+    {
+
     }
 
     public GameObject[] CalculateClickedCubesSateliteNeighbours(GameObject clickedCube)

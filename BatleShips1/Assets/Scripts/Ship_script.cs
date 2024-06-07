@@ -1,5 +1,6 @@
 //using System.Collections;
 //using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -41,8 +42,8 @@ public class Ship_script : MonoBehaviour
     public bool shield = false;
     
     public bool airDiffence = false;
-
-
+    [SerializeField] private bool gameStarted;
+    [SerializeField] public List<Vector2> shipAllAerDefensePos = new List<Vector2>();
 
 
     public int hitCount = 0;
@@ -69,8 +70,33 @@ public class Ship_script : MonoBehaviour
 
     private void Update()
     {
-        // You can use this space for any updates needed per frame
+        gameStarted = gameManager_script.gameStarted;
     }
+
+    private void OnMouseOver()
+    {
+        //Debug.Log("isEnemy = " + isEnemy);
+        //Debug.Log("gameManager_script.AllShipsAreReady = " + gameManager_script.AllShipsAreReady);
+        //Debug.Log("gameStarted = " + gameStarted);
+        if (!isEnemy && gameManager_script.AllShipsAreReady && !gameStarted && gameManager_script.settingAirDefense)
+
+        {
+            //Debug.Log(shipAllPos);
+            gameManager_script.SettingAirDefense(shipAllPos , true);
+        }
+
+    }
+
+    private void OnMouseExit()
+    {
+        if (!isEnemy && gameManager_script.AllShipsAreReady && !gameStarted && gameManager_script.settingAirDefense)
+        {
+            gameManager_script.SettingAirDefense(shipAllPos, false);
+        }
+
+
+    }
+
 
     private void OnMouseDown()
     {
@@ -120,7 +146,24 @@ public class Ship_script : MonoBehaviour
         {
             endDraggingShip();
         }
+        if (gameManager_script.settingAirDefense)
+        {
+            gameManager_script.SetAirDefence(shipAllPos);
+        }
 
+    }
+
+    public void CalculateshipAllAerDefensePos()
+    {
+        if(shipIsVertical)
+        {
+
+        }
+        // ship is Horisontal
+        else
+        {
+
+        }
     }
 
     private void clickOnShip()
@@ -386,10 +429,11 @@ public class Ship_script : MonoBehaviour
     private void ocupyGridPos()
     {
         shipIsReadyForBattle = true;
-        //grid_script.ocupyGridPos(shipAllPos, isEnemy);
         gameManager_script.OcupyGridPos(shipAllPos, isEnemy);
         gameManager_script.CheckIfGameIsReady();
         shipPlaced = true;
+        CalculateshipAllAerDefensePos();
+
     }
 
     public void resetShip()
