@@ -38,6 +38,12 @@ public class Ship_script : MonoBehaviour
     private int deployShipTryNumber = 0;
     private int deployShipMaxTryNumber = 100;
     public bool gameOver = false;
+    public bool shield = false;
+    
+    public bool airDiffence = false;
+
+
+
 
     public int hitCount = 0;
 

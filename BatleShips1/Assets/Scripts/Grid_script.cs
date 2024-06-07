@@ -49,6 +49,7 @@ public class Grid_script : MonoBehaviour
             {
                 grid_list_player[x, y] = Instantiate(cube, new Vector2(x, y), Quaternion.identity);
                 grid_list_player[x, y].transform.SetParent(GameObject.Find("Grid").transform);
+                grid_list_player[x, y].GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
     }
@@ -63,6 +64,7 @@ public class Grid_script : MonoBehaviour
                 grid_list_enemy[x, y].transform.SetParent(GameObject.Find("Grid").transform);
                 grid_list_enemy[x, y].GetComponent<Cube_script>().isEnemyBoard = true;
                 grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 5;
+                grid_list_enemy[x, y].GetComponent<SpriteRenderer>().color = Color.gray;
             }
         }
     }
@@ -100,6 +102,20 @@ public class Grid_script : MonoBehaviour
         {
             cube.SetActive(true);
         }
+    }
+
+    public bool sateliteNeighboursIsValidPos(Vector2[] neighbourPosList, bool isEnemy)
+    {
+        // Enemy
+        if (isEnemy)
+        {
+            if (isInsideGrid(neighbourPosList, isEnemy))
+            {
+                return true;
+            }
+
+        }
+        return false;
     }
 
     public bool isValidPos(Vector2[] shipAllPos, bool isEnemy)

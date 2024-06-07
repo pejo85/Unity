@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +39,8 @@ public class GameManager_script : MonoBehaviour
     [SerializeField] public List<Vector2> potencialShootingPosList = new List<Vector2>();
     public List<Vector2> previousSuccessfullHitList = new List<Vector2>();
 
+    public bool sateliteIsWatching ;
+
     private void Awake()
     {
         grid_script = Grid_obj.GetComponent<Grid_script>();
@@ -48,6 +52,8 @@ public class GameManager_script : MonoBehaviour
         grid_script.CreateGrid(Cube_obj);
         grid_script.DisableEnemyGrid();
         CreateShootingRangeList();
+
+        //sateliteIsWatching = true;
     }
 
     public void StartGame()
@@ -204,6 +210,138 @@ public class GameManager_script : MonoBehaviour
         grid_script.ocupyGridPos(shipAllPos, isEnemy);
     }
 
+    public void sateliteRevealsEnemyTiles(GameObject clickedCube)
+    {
+        GameObject[] neighbourList = new GameObject[4];
+
+        neighbourList = CalculateClickedCubesSateliteNeighbours(clickedCube);
+
+        foreach (GameObject neighbour in neighbourList)
+        {
+            neighbour.GetComponent<Cube_script>().RevealTile();
+        }
+    }
+
+    public void SateliteHoversOverTile(GameObject[] HoveredCubeNeighbourList)
+    {
+        foreach (GameObject neighbour in HoveredCubeNeighbourList)
+        {
+            if (neighbour.GetComponent<Cube_script>().isRevealed == false)
+            {
+                neighbour.GetComponent<SpriteRenderer>().color = Color.cyan;
+            }
+            
+        }
+    }
+
+    public void SateliteHoversOverExitTile(GameObject[] HoveredCubeNeighbourList)
+    {
+        foreach (GameObject neighbour in HoveredCubeNeighbourList)
+        {
+            if (neighbour.GetComponent<Cube_script>().isRevealed == false)
+            {
+                neighbour.GetComponent<SpriteRenderer>().color = Color.gray;
+            }
+            
+        }
+    }
+
+    public void sateliteClick()
+    {
+        sateliteIsWatching = true;
+    }
+
+    public GameObject[] CalculateClickedCubesSateliteNeighbours(GameObject clickedCube)
+    {
+        GameObject[] neighbourList = new GameObject[4];
+        Vector2[] neighbourList11 = new Vector2[4];
+
+        int x = (int)clickedCube.transform.position.x;
+        int y = (int)clickedCube.transform.position.y;
+
+        Vector2 neighbour1Pos = new Vector2(x + 1, y);
+        Vector2 neighbour2Pos = new Vector2(x + 1, y-1);
+        Vector2 neighbour3Pos = new Vector2(x, y-1);
+
+        neighbourList11[0] = new Vector2(clickedCube.transform.position.x , clickedCube.transform.position.y);
+        neighbourList11[1] = neighbour1Pos;
+        neighbourList11[2] = neighbour2Pos;
+        neighbourList11[3] = neighbour3Pos;
+
+        // Right
+        if (grid_script.sateliteNeighboursIsValidPos(neighbourList11, true) )
+        {
+            for (int i = 0; i < neighbourList11.Length; i++)
+            {
+                neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+            }
+        }
+
+        else
+        {
+            // Down 
+            neighbour1Pos = new Vector2(x , y-1);
+            neighbour2Pos = new Vector2(x - 1, y - 1);
+            neighbour3Pos = new Vector2(x -1, y);
+
+            neighbourList11[0] = new Vector2(clickedCube.transform.position.x, clickedCube.transform.position.y);
+            neighbourList11[1] = neighbour1Pos;
+            neighbourList11[2] = neighbour2Pos;
+            neighbourList11[3] = neighbour3Pos;
+
+            if (grid_script.sateliteNeighboursIsValidPos(neighbourList11, true))
+            {
+                for (int i = 0; i < neighbourList11.Length; i++)
+                {
+                    neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+                }
+            }
+
+            else
+            {
+                // Left
+                neighbour1Pos = new Vector2(x - 1, y);
+                neighbour2Pos = new Vector2(x - 1, y + 1);
+                neighbour3Pos = new Vector2(x, y + 1);
+
+                neighbourList11[0] = new Vector2(clickedCube.transform.position.x, clickedCube.transform.position.y);
+                neighbourList11[1] = neighbour1Pos;
+                neighbourList11[2] = neighbour2Pos;
+                neighbourList11[3] = neighbour3Pos;
+
+                if (grid_script.sateliteNeighboursIsValidPos(neighbourList11, true))
+                {
+                    for (int i = 0; i < neighbourList11.Length; i++)
+                    {
+                        neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+                    }
+                }
+                else
+                {
+                    // Up
+                    neighbour1Pos = new Vector2(x , y+1);
+                    neighbour2Pos = new Vector2(x + 1, y + 1);
+                    neighbour3Pos = new Vector2(x +1, y);
+
+                    neighbourList11[0] = new Vector2(clickedCube.transform.position.x, clickedCube.transform.position.y);
+                    neighbourList11[1] = neighbour1Pos;
+                    neighbourList11[2] = neighbour2Pos;
+                    neighbourList11[3] = neighbour3Pos;
+
+                    if (grid_script.sateliteNeighboursIsValidPos(neighbourList11, true))
+                    {
+                        for (int i = 0; i < neighbourList11.Length; i++)
+                        {
+                            neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+                        }
+                    }
+                }
+
+            }
+        }
+        return neighbourList;
+    }
+
     public void PlayerShootsToEnemy(GameObject Cube)
     {
         if (Cube.GetComponent<Cube_script>().wasShot == false)
@@ -229,10 +367,8 @@ public class GameManager_script : MonoBehaviour
             playerMove = true;
             enemyMove = false;
             Cube.GetComponent<Cube_script>().wasShot = true;
-            Cube.GetComponent<SpriteRenderer>().sortingOrder = 0;
-
+            Cube.GetComponent<Cube_script>().RevealTile();
             HitEnemyShip(Cube.transform.position);
-
             InstantiateHitMissAnimation(Cube.transform.position, true);
         }
         else
@@ -241,8 +377,8 @@ public class GameManager_script : MonoBehaviour
             enemyMove = true;
 
             Cube.GetComponent<Cube_script>().wasShot = true;
+            Cube.GetComponent<Cube_script>().RevealTile();
             InstantiateHitMissAnimation(Cube.transform.position, false);
-
             StartCoroutine(EnemyShootsToPlayer());
         }
     }
@@ -273,38 +409,20 @@ public class GameManager_script : MonoBehaviour
 
     public void EnemyHitOrMissTarget(GameObject Cube, Vector2 shootPos)
     {
-        //Debug.Log(Cube.name + " -aaa--> " + Cube.transform.position);
-
-        //if (Cube.gameObject == null)
-        //{
-        //    Debug.Log("NULLLLLLLLL");
-        //}
-        //
-        //if (shootPos == null)
-        //{
-        //    Debug.Log("NULLLLLLLLLiiiiiii");
-        //}
 
         if (Cube.GetComponent<Cube_script>().hitTheTarget())
         {
-
             HitPlayerShip(Cube.transform.position);
-
             InstantiateHitMissAnimation(Cube.transform.position, true);
 
             if (shipIsStillAlive)
             {
-
                 UpdateHuntingMode(shootPos);
-
             }
             else
             {
-
                 previousSuccessfullHitList.Clear();
-
                 potencialShootingPosList.Clear();
-
             }
 
             StartCoroutine(EnemyShootsToPlayer()); // Continue enemy's turn if it hits
@@ -329,14 +447,9 @@ public class GameManager_script : MonoBehaviour
         }
         else
         {
-            //Debug.Log("zzzzz");
             int randomIndex = Random.Range(0, shootingRangeList.Count);
-            //Debug.Log("randomIndex = " + randomIndex);
             shootPos = shootingRangeList[randomIndex];
-            //Debug.Log("shootPos = " + shootPos);
-            //shootingRangeList.RemoveAt(randomIndex);
         }
-
         return shootPos;
     }
 
@@ -351,8 +464,6 @@ public class GameManager_script : MonoBehaviour
         List<Vector2> potentialPositions = new List<Vector2>();
         int x = (int)hitPos.x;
         int y = (int)hitPos.y;
-
-        //Debug.Log("previousSuccessfullHitList.Count = " + previousSuccessfullHitList.Count);
 
         // If we have only one hit, add all four adjacent positions
         if (previousSuccessfullHitList.Count == 1)
@@ -408,7 +519,6 @@ public class GameManager_script : MonoBehaviour
         {
             Debug.Log("shouldnot be 0 !!!!!!!!!!");
         }
-
         return potentialPositions;
     }
 

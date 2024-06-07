@@ -21,6 +21,10 @@ public class Cube_script : MonoBehaviour
     private Vector3 mouseOffset;
     private Vector3 initialMousePos;
 
+    GameObject[] neighbourList = new GameObject[4];
+
+    public bool isRevealed = false;
+
 
     private void Start()
     {
@@ -32,6 +36,25 @@ public class Cube_script : MonoBehaviour
     {
         gameStarted = gameManager_script.gameStarted;
 
+    }
+
+    private void OnMouseOver()
+    {
+        if (isEnemyBoard && gameManager_script.sateliteIsWatching)
+        {
+            neighbourList = gameManager_script.CalculateClickedCubesSateliteNeighbours(this.gameObject);
+            gameManager_script.SateliteHoversOverTile(neighbourList);
+        }
+        
+    }
+
+    private void OnMouseExit()
+    {
+        if (isEnemyBoard && gameManager_script.sateliteIsWatching)
+        {
+            gameManager_script.SateliteHoversOverExitTile(neighbourList);
+        }
+        
     }
 
     private void OnMouseDown()
@@ -47,15 +70,20 @@ public class Cube_script : MonoBehaviour
     private void OnMouseUp()
     {
         mouseClicked = true;
-
+        //Debug.Log(gameManager_script.sateliteIsWatching);
         
         if (gameStarted)
         {
+            if (gameManager_script.sateliteIsWatching)
+            {
+                gameManager_script.sateliteRevealsEnemyTiles(this.gameObject);
+                gameManager_script.sateliteIsWatching = false;
+            }
 
-            if (gameManager_script.playerMove)
+            else if (gameManager_script.playerMove)
             {
                 // When player shoots the enemy
-                if (mouseClicked && isEnemyBoard)
+                if (mouseClicked && isEnemyBoard && !gameManager_script.sateliteIsWatching)
                 {
                     gameManager_script.PlayerShootsToEnemy(this.gameObject);
                 }
@@ -63,6 +91,13 @@ public class Cube_script : MonoBehaviour
 
         }
 
+    }
+
+    public void RevealTile()
+    {
+        GetComponent<SpriteRenderer>().sortingOrder = 0;
+        isRevealed = true;
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public bool hitTheTarget()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7008327069858828281}
   - component: {fileID: 601899926707569808}
   m_Layer: 0
-  m_Name: cube
+  m_Name: reveal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f1ea4901c4b7014eaac87daaf877304, type: 3}
-  m_Color: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,13 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
+  Missed_img: {fileID: 0}
+  FireAnimation: {fileID: 0}
   isOcupied: 0
   mouseClicked: 0
   isEnemyBoard: 0
-  wasShot: 0
   gameStarted: 0
   gameOver: 0
-  isRevealed: 0
 --- !u!50 &7008327069858828281
 Rigidbody2D:
   serializedVersion: 4
