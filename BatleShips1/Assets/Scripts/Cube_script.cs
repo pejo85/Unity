@@ -10,18 +10,18 @@ public class Cube_script : MonoBehaviour
 
 
     [SerializeField] public bool isOcupied = false;
-    private bool isColided = false;
+    //private bool isColided = false;
     public bool mouseClicked = false;
     public bool isEnemyBoard = false;
     public bool wasShot = false;
     [SerializeField] private bool gameStarted;
 
-    public bool gameOver = false;
+    //public bool gameOver = false;
 
     private Vector3 mouseOffset;
     private Vector3 initialMousePos;
 
-    GameObject[] neighbourList = new GameObject[4];
+    GameObject[] CubesSateliteNeighboursList = new GameObject[4];
 
 
     public bool isRevealed = false;
@@ -45,8 +45,8 @@ public class Cube_script : MonoBehaviour
         //Debug.Log("isHovering on = " + gameObject.name);
         if (isEnemyBoard && gameManager_script.sateliteIsWatching)
         {
-            neighbourList = gameManager_script.CalculateClickedCubesSateliteNeighbours(this.gameObject);
-            gameManager_script.SateliteHoversOverTile(neighbourList);
+            CubesSateliteNeighboursList = gameManager_script.CalculateClickedCubesSateliteNeighbours(this.gameObject);
+            gameManager_script.SateliteHoversOverTile(CubesSateliteNeighboursList);
         }
         //if (!isEnemyBoard && gameManager_script.AllShipsAreReady && !gameStarted)
         //{
@@ -59,7 +59,7 @@ public class Cube_script : MonoBehaviour
     {
         if (isEnemyBoard && gameManager_script.sateliteIsWatching)
         {
-            gameManager_script.SateliteHoversOverExitTile(neighbourList);
+            gameManager_script.SateliteHoversOverExitTile(CubesSateliteNeighboursList);
         }
         //if (!isEnemyBoard && gameManager_script.AllShipsAreReady && !gameStarted)
         //{
@@ -136,60 +136,58 @@ public class Cube_script : MonoBehaviour
     {
         if (collision != null)
         {
-            isColided = true;
-            if (collision.gameObject.tag == "Ship")
-            {
-                if (collision.GetComponent<Ship_script>().shipIsReadyForBattle == false)
-                {
-                    IsOcupiedWhileDragging();
-                }
-
-            }
+            //isColided = true;
+            //if (collision.gameObject.tag == "Ship")
+            //{
+            //    if (collision.GetComponent<Ship_script>().shipIsReadyForBattle == false)
+            //    {
+            //        IsOcupiedWhileDragging();
+            //    }
+            //
+            //}
 
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isColided = false ;
-        if (collision.gameObject.tag == "Ship")
-        {
-            if (!isOcupied)
-            {
-                //GetComponent<SpriteRenderer>().color = Color.white;
-                //collision.GetComponent<SpriteRenderer>().color = Color.white;
-            }            
-        }
+        //isColided = false ;
+        //if (collision.gameObject.tag == "Ship")
+        //{
+        //    if (!isOcupied)
+        //    {
+        //        //GetComponent<SpriteRenderer>().color = Color.white;
+        //        //collision.GetComponent<SpriteRenderer>().color = Color.white;
+        //    }            
+        //}
         
     }
 
-    public void IsOcupiedWhileDragging()
-    {
-        if (isOcupied)
-        {
-            //GetComponent<SpriteRenderer>().color = Color.red;
-        }
-    }
+    //public void IsOcupiedWhileDragging()
+    //{
+    //    if (isOcupied)
+    //    {
+    //        //GetComponent<SpriteRenderer>().color = Color.red;
+    //    }
+    //}
 
     public void IsOcupied()
     {
         isOcupied = true;
-        //GetComponent<SpriteRenderer>().color = Color.yellow;
     }
 
     public void IsFree()
     {
         isOcupied = false;
-        //GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    private void checkIfStaysOcupied()
-    {
-        if (!isColided && isOcupied)
-            {
-                //GetComponent<SpriteRenderer>().color = Color.white;
-            }
-    }
+    //private void checkIfStaysOcupied()
+    //{
+    //    if (!isColided && isOcupied)
+    //        {
+    //            //GetComponent<SpriteRenderer>().color = Color.white;
+    //        }
+    //}
 
     public void CubeColor(Color color)
     {

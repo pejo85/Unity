@@ -2174,6 +2174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063537347}
   - component: {fileID: 1063537346}
+  - component: {fileID: 1063537348}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -2210,6 +2211,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1063537348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063537345}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553506845f4d1fc4492c5da5adfe7a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1063727205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2398,6 +2411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1108453967}
   - component: {fileID: 1108453968}
+  - component: {fileID: 1108453969}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2455,6 +2469,18 @@ MonoBehaviour:
   previousSuccessfullHitList: []
   sateliteIsWatching: 0
   settingAirDefense: 0
+--- !u!114 &1108453969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108453966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b95f68346b501479e030a0fcd8783a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1152635409
 GameObject:
   m_ObjectHideFlags: 0
@@ -4021,7 +4047,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1932704482}
   - component: {fileID: 1932704485}
-  - component: {fileID: 1932704484}
   - component: {fileID: 1932704483}
   m_Layer: 0
   m_Name: Hit_miss_anim_obj
@@ -4066,18 +4091,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1932704484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932704481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb6513987dc1e24e89334d2a2fff234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &1932704485
 SpriteRenderer:
   m_ObjectHideFlags: 0

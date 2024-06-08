@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hit_miss_script : MonoBehaviour
+public class Ship_script_1 : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

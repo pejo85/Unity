@@ -454,12 +454,38 @@ public class GameManager_script : MonoBehaviour
 
     public void shootRocket(GameObject Cube, bool isPlayer)
     {
-        Vector3 bulletStartingPos = isPlayer ? new Vector3(0, 0, 0) : new Vector3(17, 0, 0);
-        GameObject bullet = Instantiate(Bullet_obj, bulletStartingPos, Quaternion.identity);
+        Vector2Int bulletStartingPos = calculateBulletStartingPos(isPlayer);
+        GameObject bullet = Instantiate(Bullet_obj, new Vector3( bulletStartingPos.x , bulletStartingPos.y, 0), Quaternion.identity);
         bullet.GetComponent<bullet_script>().targetPosition = Cube.transform.position;
         bullet.GetComponent<bullet_script>().isPlayerShot = isPlayer; // Pass this info to the bullet script
-        bullet.transform.position = bulletStartingPos;
+        bullet.transform.position = new Vector3(bulletStartingPos.x, bulletStartingPos.y, 0);
         bulletIsInTheAir = true;
+    }
+
+    public Vector2Int calculateBulletStartingPos(bool isPlayer)
+    {
+        Vector2Int bulletStartingPos;
+        GameObject playerRandomShip = playerShips.transform.GetChild(Random.Range(0, playerShips.transform.childCount)).gameObject;
+        GameObject enemyRandomShip = enemyShips.transform.GetChild(Random.Range(0, enemyShips.transform.childCount)).gameObject;
+
+        //GameObject ship_4 = playerShips.transform.Find("ship_4").gameObject;
+        //Vector2Int tempBulletPos = (playerRandomShip.GetComponent<Ship_script>().shipAllPos[playerRandomShip.GetComponent<Ship_script>().shipAllPos.Length - 1]);
+        //Vector2Int tempBulletPos = (ship_4.GetComponent<Ship_script>().shipAllPos[ship_4.GetComponent<Ship_script>().shipAllPos.Length - 1]);
+        //Debug.Log(ship_4.GetComponent<Ship_script>().shipAllPos[ship_4.GetComponent<Ship_script>().shipAllPos.Length - 1]);
+        if (isPlayer)
+        {
+            Vector2Int tempBulletPos = (playerRandomShip.GetComponent<Ship_script>().shipAllPos[playerRandomShip.GetComponent<Ship_script>().shipAllPos.Length - 1]);
+            //bulletStartingPos = new Vector3(0, 0, 0);
+            bulletStartingPos = tempBulletPos;
+        }
+        else
+        {
+            Vector2Int tempBulletPos = new Vector2Int (Random.Range(10, 18), Random.Range(0, 8));
+            //Vector2Int tempBulletPos = (enemyRandomShip.GetComponent<Ship_script>().shipAllPos[enemyRandomShip.GetComponent<Ship_script>().shipAllPos.Length - 1]);
+            //bulletStartingPos = new Vector2Int(17, 0);
+            bulletStartingPos = tempBulletPos;
+        }
+        return bulletStartingPos;
     }
 
     public void PlayerHitOrMissTarget(GameObject Cube)

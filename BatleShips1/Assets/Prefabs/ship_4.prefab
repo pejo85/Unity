@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5433653332594691445}
   - component: {fileID: 5556021902515291513}
   - component: {fileID: 4423495820264988671}
+  - component: {fileID: 4255384300087183027}
   - component: {fileID: 1365236796529498504}
   - component: {fileID: 3889872664479860211}
   m_Layer: 0
@@ -117,7 +118,7 @@ MonoBehaviour:
   shipStartingPos: {x: 0, y: 0}
   gameOver: 0
   shield: 0
-  airDiffence: 0
+  airDiffenceisOn: 0
   gameStarted: 0
   shipAllAerDefensePos:
   - {x: 0, y: 0}
@@ -139,6 +140,18 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   hitCount: 0
+--- !u!114 &4255384300087183027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749264754456659551}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329c3b1d56855d34abdf670e5dfba985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1365236796529498504
 Rigidbody2D:
   serializedVersion: 4
