@@ -6,9 +6,9 @@ public static class Utility_script
 {
 
 
-    public static Vector2 round_pos(Vector2 pos)
+    public static Vector2Int round_pos(Vector2 pos)
     {
-        return new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
+        return new Vector2Int((int)Mathf.Round(pos.x), (int)Mathf.Round(pos.y));
     }
 
     public static int random_num(int num1, int num2)

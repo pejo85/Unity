@@ -100,13 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
-  Missed_img: {fileID: 0}
-  FireAnimation: {fileID: 0}
   isOcupied: 0
   mouseClicked: 0
   isEnemyBoard: 0
+  wasShot: 0
   gameStarted: 0
   gameOver: 0
+  isRevealed: 0
 --- !u!50 &7008327069858828281
 Rigidbody2D:
   serializedVersion: 4

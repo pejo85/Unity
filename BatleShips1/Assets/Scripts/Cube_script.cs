@@ -23,7 +23,9 @@ public class Cube_script : MonoBehaviour
 
     GameObject[] neighbourList = new GameObject[4];
 
+
     public bool isRevealed = false;
+    public bool isUnderAirDefense;
 
 
     private void Start()
@@ -40,6 +42,7 @@ public class Cube_script : MonoBehaviour
 
     private void OnMouseOver()
     {
+        //Debug.Log("isHovering on = " + gameObject.name);
         if (isEnemyBoard && gameManager_script.sateliteIsWatching)
         {
             neighbourList = gameManager_script.CalculateClickedCubesSateliteNeighbours(this.gameObject);

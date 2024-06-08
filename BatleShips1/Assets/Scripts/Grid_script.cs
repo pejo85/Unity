@@ -38,7 +38,7 @@ public class Grid_script : MonoBehaviour
     public void CreateGrid(GameObject Cube)
     {
         CreatePlayerGrid(Cube);
-        CreateEnemyGrid(Cube);  
+        CreateEnemyGrid(Cube);
     }
 
     private void CreatePlayerGrid(GameObject cube)
@@ -104,12 +104,12 @@ public class Grid_script : MonoBehaviour
         }
     }
 
-    public bool sateliteNeighboursIsValidPos(Vector2[] neighbourPosList, bool isEnemy)
+    public bool sateliteNeighboursIsValidPos(Vector2Int[] neighbourPosList, bool isEnemy)
     {
         // Enemy
         if (isEnemy)
         {
-            if (isInsideGrid(neighbourPosList, isEnemy))
+            if (ShipIsInsideGrid(neighbourPosList, isEnemy))
             {
                 return true;
             }
@@ -118,19 +118,19 @@ public class Grid_script : MonoBehaviour
         return false;
     }
 
-    public bool isValidPos(Vector2[] shipAllPos, bool isEnemy)
+    public bool isValidPos(Vector2Int[] shipAllPos, bool isEnemy)
     {
         // Enemy
         if (isEnemy)
         {
-            if (isInsideGrid(shipAllPos, isEnemy) )
+            if (ShipIsInsideGrid(shipAllPos, isEnemy))
             {
                 // if position is already ocupied
                 for (int i = 0; i < shipAllPos.Length; i++)
                 {
-                    if (grid_list_enemy[(int)(shipAllPos[i].x - distanceBetweenGrids), (int)shipAllPos[i].y].gameObject.GetComponent<Cube_script>().isOcupied)
+                    if (grid_list_enemy[(shipAllPos[i].x - distanceBetweenGrids), shipAllPos[i].y].gameObject.GetComponent<Cube_script>().isOcupied)
                     {
-                        return false; 
+                        return false;
                     }
                 }
                 // if all coords are inside grid and already not ocupied, then it is walid pos
@@ -147,12 +147,12 @@ public class Grid_script : MonoBehaviour
         // Player
         else
         {
-            if (isInsideGrid(shipAllPos, isEnemy))
+            if (ShipIsInsideGrid(shipAllPos, isEnemy))
             {
                 // if position is already ocupied
                 for (int i = 0; i < shipAllPos.Length; i++)
                 {
-                    if (grid_list_player[(int)(shipAllPos[i].x), (int)shipAllPos[i].y].gameObject.GetComponent<Cube_script>().isOcupied)
+                    if (grid_list_player[(shipAllPos[i].x), shipAllPos[i].y].gameObject.GetComponent<Cube_script>().isOcupied)
                     {
                         return false;
                     }
@@ -171,7 +171,7 @@ public class Grid_script : MonoBehaviour
 
     }
 
-    public bool isInsideGrid(Vector2[] shipAllPos, bool isEnemy)
+    public bool ShipIsInsideGrid(Vector2Int[] shipAllPos, bool isEnemy)
     {
         // Enemy
         if (isEnemy)
@@ -215,7 +215,40 @@ public class Grid_script : MonoBehaviour
 
     }
 
-    public bool isInsideGridPotencialShootingList(Vector2 potencialPos)
+    public bool PosIsInsideGrid(Vector2Int pos, bool isEnemy)
+    {
+        // Enemy
+        if (isEnemy)
+        {
+            if (pos.x < grid_list_enemy[0, 0].transform.position.x || pos.x > grid_list_enemy[gridWidth - 1, gridHeight - 1].transform.position.x)
+            {
+                return false; //NOT INSIDE GRID on X axis
+            }
+            if (pos.y < grid_list_enemy[0, 0].transform.position.y || pos.y > grid_list_enemy[gridWidth - 1, gridHeight - 1].transform.position.y)
+            {
+                return false; //NOT INSIDE GRID on Y axis }
+            }
+        }
+        // Player
+        else
+        {
+            if (pos.x < grid_list_player[0, 0].transform.position.x || pos.x > grid_list_player[gridWidth - 1, gridHeight - 1].transform.position.x)
+            {
+                //NOT INSIDE GRID on X axis
+                return false;
+            }
+
+            if (pos.y < grid_list_player[0, 0].transform.position.y || pos.y > grid_list_player[gridWidth - 1, gridHeight - 1].transform.position.y)
+            {
+                //NOT INSIDE GRID on Y axis
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public bool isInsideGridPotencialShootingList(Vector2Int potencialPos)
     {
         if (potencialPos.x < grid_list_player[0, 0].transform.position.x || potencialPos.x > grid_list_player[gridWidth - 1, gridHeight - 1].transform.position.x)
         {
@@ -231,14 +264,14 @@ public class Grid_script : MonoBehaviour
         return true ;
     }
 
-    public void ocupyGridPos(Vector2[] shipAllPos, bool isEnemy)
+    public void ocupyGridPos(Vector2Int[] shipAllPos, bool isEnemy)
     {
         // Enemy
         if (isEnemy)
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                grid_list_enemy[(int)shipAllPos[i].x - distanceBetweenGrids, (int)shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsOcupied();
+                grid_list_enemy[shipAllPos[i].x - distanceBetweenGrids, shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsOcupied();
             }
         }
 
@@ -247,18 +280,18 @@ public class Grid_script : MonoBehaviour
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                grid_list_player[(int)shipAllPos[i].x, (int)shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsOcupied();
+                grid_list_player[shipAllPos[i].x, shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsOcupied();
             }
         }
     }
 
-    public void makeFreeGridPos(Vector2[] shipAllPos, bool isEnemy)
+    public void makeFreeGridPos(Vector2Int[] shipAllPos, bool isEnemy)
     {
         if (isEnemy)
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                grid_list_enemy[(int)shipAllPos[i].x - distanceBetweenGrids, (int)shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsFree();
+                grid_list_enemy[shipAllPos[i].x - distanceBetweenGrids, shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsFree();
             }
         }
         // PLAYER
@@ -266,10 +299,47 @@ public class Grid_script : MonoBehaviour
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                grid_list_player[(int)shipAllPos[i].x, (int)shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsFree();
+                grid_list_player[shipAllPos[i].x, shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsFree();
             }
         }
         
+    }
+
+    public void DisableAllGridPosColider()
+    {
+        // Disable Box Colider on Player Grid
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                if (grid_list_player[x, y].gameObject != null)
+                {
+                    //grid_list_player[x, y].gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                    grid_list_player[x, y].gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+
+            }
+        }
+    }
+
+    public void EnableAllGridPosColider()
+    {
+        // Enable Box Colider on Player Grid
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                if (grid_list_player[x, y].gameObject != null)
+                {
+                    //grid_list_player[x, y].gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+                    grid_list_player[x, y].gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    //grid_list_player[x, y].gameObject.GetComponent<BoxCollider2D>().;
+                    //Debug.Log("enable");
+
+                }
+
+            }
+        }
     }
 
     public void resetGrid()

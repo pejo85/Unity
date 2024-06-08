@@ -1,7 +1,10 @@
 //using System.Collections;
 //using System.Collections.Generic;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
+//using UnityEngine.UIElements;
+//using static UnityEditor.PlayerSettings;
 
 
 public class Ship_script : MonoBehaviour
@@ -12,7 +15,7 @@ public class Ship_script : MonoBehaviour
 
     [SerializeField] float ship_grid_offset; // ship 4 int offset =  grid[0,0] = [1.5 , 0]
 
-    [SerializeField] public Vector2[] shipAllPos = new Vector2[1];
+    [SerializeField] public Vector2Int[] shipAllPos = new Vector2Int[1];
 
     [SerializeField] public bool isEnemy = false;
     [SerializeField] public bool shipIsVertical = false;
@@ -41,9 +44,9 @@ public class Ship_script : MonoBehaviour
     public bool gameOver = false;
     public bool shield = false;
     
-    public bool airDiffence = false;
+    public bool airDiffenceisOn = false;
     [SerializeField] private bool gameStarted;
-    [SerializeField] public List<Vector2> shipAllAerDefensePos = new List<Vector2>();
+    [SerializeField] public List<Vector2Int> shipAllAerDefensePos = new List<Vector2Int>();
 
 
     public int hitCount = 0;
@@ -78,11 +81,12 @@ public class Ship_script : MonoBehaviour
         //Debug.Log("isEnemy = " + isEnemy);
         //Debug.Log("gameManager_script.AllShipsAreReady = " + gameManager_script.AllShipsAreReady);
         //Debug.Log("gameStarted = " + gameStarted);
+        //Debug.Log("isHovering on = " + gameObject.name);
         if (!isEnemy && gameManager_script.AllShipsAreReady && !gameStarted && gameManager_script.settingAirDefense)
 
         {
             //Debug.Log(shipAllPos);
-            gameManager_script.SettingAirDefense(shipAllPos , true);
+            gameManager_script.SettingAirDefense(this.gameObject , true);
         }
 
     }
@@ -91,7 +95,7 @@ public class Ship_script : MonoBehaviour
     {
         if (!isEnemy && gameManager_script.AllShipsAreReady && !gameStarted && gameManager_script.settingAirDefense)
         {
-            gameManager_script.SettingAirDefense(shipAllPos, false);
+            gameManager_script.SettingAirDefense(this.gameObject, false);
         }
 
 
@@ -104,7 +108,8 @@ public class Ship_script : MonoBehaviour
         {
             initialMousePos = GetMouseWorldPos();
 
-            if (shipIsReadyForBattle) // If ship is deployed on the grid and I want to redeploy
+            //if (shipIsReadyForBattle)
+            if (shipIsReadyForBattle && !gameManager_script.settingAirDefense) // If ship is deployed on the grid and I want to redeploy
             {
                 shipIsReadyForBattle = false;
                 makeFreeOcupiedPos();
@@ -125,7 +130,7 @@ public class Ship_script : MonoBehaviour
             if (isDraggingShip)
             {
                 transform.position = GetMouseWorldPos() + mouseOffset;
-                Vector2 temp_pos = Utility_script.round_pos(transform.position);
+                Vector2Int temp_pos = Utility_script.round_pos(transform.position);
             }
         }
     }
@@ -137,7 +142,7 @@ public class Ship_script : MonoBehaviour
             mouseClicked = true;
         }
 
-        if (mouseClicked && shipCanRotate)
+        if (mouseClicked && shipCanRotate && !gameManager_script.settingAirDefense)
         {
             clickOnShip();
         }
@@ -148,27 +153,50 @@ public class Ship_script : MonoBehaviour
         }
         if (gameManager_script.settingAirDefense)
         {
-            gameManager_script.SetAirDefence(shipAllPos);
+            gameManager_script.SetAirDefence(this.gameObject, false);
         }
 
     }
 
-    public void CalculateshipAllAerDefensePos()
+    public List<Vector2Int> CalculateshipAllAerDefensePos(GameObject Ship)
     {
-        if(shipIsVertical)
-        {
+        List<Vector2Int> neighbourList = new List<Vector2Int>();
 
-        }
-        // ship is Horisontal
-        else
-        {
+        int x = shipAllPos[0].x - 1;
+        int y = shipAllPos[0].y - 1;
 
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < shipAllPos.Length + 2; j++)
+            {
+                if (shipIsVertical)
+                {
+                    if (gameManager_script.PosIsInsideGrid(new Vector2Int(x + i, y + j), isEnemy))
+                    {
+                        //shipAllAerDefensePos.Add(new Vector2Int(x + i, y + j));
+                        neighbourList.Add(new Vector2Int(x + i, y + j));
+                    }
+                }
+                // Horisontal
+                else
+                {
+                    if (gameManager_script.PosIsInsideGrid(new Vector2Int(x + j, y + i), isEnemy))
+                    {
+                        //shipAllAerDefensePos.Add(new Vector2Int(x + j, y + i));
+                        neighbourList.Add(new Vector2Int(x + j, y + i));
+                    }
+                }
+                
+            }
         }
+
+        return neighbourList;
+        //return shipAllAerDefensePos;
     }
 
     private void clickOnShip()
     {
-        Vector2 currentPos = new Vector2(shipAllPos[0].x, shipAllPos[0].y);
+        Vector2Int currentPos = new Vector2Int(shipAllPos[0].x, shipAllPos[0].y);
 
         changeShipOrientation();
         makeFreeOcupiedPos(); // Clear current ocupied pos
@@ -179,7 +207,7 @@ public class Ship_script : MonoBehaviour
 
     private void endDraggingShip()
     {
-        Vector2 currentPosRounded = Vector2.zero;
+        Vector2Int currentPosRounded = Vector2Int.zero;
 
         if (shipIsVertical)
         {
@@ -223,7 +251,7 @@ public class Ship_script : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
 
-    public void placeShip(Vector2 currentPosRounded)
+    public void placeShip(Vector2Int currentPosRounded)
     {
         shipAllPosCalculate(currentPosRounded);
 
@@ -247,7 +275,7 @@ public class Ship_script : MonoBehaviour
         if (isDraggingShip)
         {
             transform.position = shipLastLegitPos;
-            shipAllPosCalculate(transform.position);
+            shipAllPosCalculate(shipAllPos[0]);
             
         }
 
@@ -257,7 +285,7 @@ public class Ship_script : MonoBehaviour
             rollbackShipPos = true;
 
             changeShipOrientation();
-            shipAllPosCalculate(new Vector2(shipAllPos[0].x, shipAllPos[0].y));
+            shipAllPosCalculate(new Vector2Int(shipAllPos[0].x, shipAllPos[0].y));
             ocupyGridPos();
             updateShipPos();
             
@@ -286,7 +314,7 @@ public class Ship_script : MonoBehaviour
         deployShipTryNumber = 0;
     }
 
-    private Vector2 calculateRandomPos()
+    private Vector2Int calculateRandomPos()
     {
         int shipRandomX;
         int shipRandomY;
@@ -301,7 +329,7 @@ public class Ship_script : MonoBehaviour
             shipRandomX = Utility_script.random_num(0, gridWidth ); // (0,8)
             shipRandomY = Utility_script.random_num(0, gridHeight); // (0,8)
         }
-        return  new Vector2(shipRandomX, shipRandomY);
+        return  new Vector2Int(shipRandomX, shipRandomY);
 
     }
 
@@ -388,13 +416,13 @@ public class Ship_script : MonoBehaviour
 
     }
 
-    public void shipAllPosCalculate(Vector2 pos)
+    public void shipAllPosCalculate(Vector2Int pos)
     {
         if (shipIsVertical)
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                shipAllPos[i] = new Vector2(pos.x, pos.y + i);
+                shipAllPos[i] = new Vector2Int(pos.x, pos.y + i);
             }
         }
         // Horisontal
@@ -402,7 +430,7 @@ public class Ship_script : MonoBehaviour
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                shipAllPos[i] = new Vector2(pos.x + i, pos.y);
+                shipAllPos[i] = new Vector2Int(pos.x + i, pos.y);
             }
         }
     }
@@ -413,7 +441,7 @@ public class Ship_script : MonoBehaviour
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                shipAllPos[i] = new Vector2(0, 0);
+                shipAllPos[i] = new Vector2Int(0, 0);
             }
         }
         // Horisontal
@@ -421,7 +449,7 @@ public class Ship_script : MonoBehaviour
         {
             for (int i = 0; i < shipAllPos.Length; i++)
             {
-                shipAllPos[i] = new Vector2(0, 0);
+                shipAllPos[i] = new Vector2Int(0, 0);
             }
         }
     }
@@ -432,7 +460,7 @@ public class Ship_script : MonoBehaviour
         gameManager_script.OcupyGridPos(shipAllPos, isEnemy);
         gameManager_script.CheckIfGameIsReady();
         shipPlaced = true;
-        CalculateshipAllAerDefensePos();
+        CalculateshipAllAerDefensePos(this.gameObject);
 
     }
 

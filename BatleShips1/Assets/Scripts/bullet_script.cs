@@ -64,7 +64,7 @@ public class bullet_script : MonoBehaviour
                     else
                     {
                         //Debug.Log(collision.name + " -zzz- " + collision.transform.position);
-                        gameManager_script.EnemyHitOrMissTarget(collision.gameObject, collision.transform.position);
+                        gameManager_script.EnemyHitOrMissTarget(collision.gameObject, new Vector2Int((int)collision.transform.position.x , (int)collision.transform.position.y) );
                     }
                     //Debug.Log("xxxx");
                     gameManager_script.bulletIsInTheAir = false;

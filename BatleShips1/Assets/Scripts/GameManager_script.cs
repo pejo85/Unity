@@ -21,7 +21,7 @@ public class GameManager_script : MonoBehaviour
     private Cube_script cube_Script;
     private Ship_script ship_script;
 
-    public List<Vector2> shootingRangeList;
+    public List<Vector2Int> shootingRangeList;
 
     public int gridWidth = 8;
     public int gridHeight = 8;
@@ -36,8 +36,8 @@ public class GameManager_script : MonoBehaviour
     public bool shipIsStillAlive = false;
     public bool bulletIsInTheAir = false;
     private bool potencialShipAllignmentIsHorisontal = true;
-    [SerializeField] public List<Vector2> potencialShootingPosList = new List<Vector2>();
-    public List<Vector2> previousSuccessfullHitList = new List<Vector2>();
+    [SerializeField] public List<Vector2Int> potencialShootingPosList = new List<Vector2Int>();
+    public List<Vector2Int> previousSuccessfullHitList = new List<Vector2Int>();
 
     /*
        ship4 - dome scale: x:0.6 , y:0.3  , z:0
@@ -67,6 +67,7 @@ public class GameManager_script : MonoBehaviour
     public void StartGame()
     {
         grid_script.EnableEnemyGrid();
+        
         PlaceEnemyShipsRandomly();
         DisableAllShipMovement();
         DisableEveryShipRigidBody();
@@ -75,6 +76,7 @@ public class GameManager_script : MonoBehaviour
         gameStarted = true;
         playerMove = true;
         settingAirDefense = false;
+        grid_script.EnableAllGridPosColider();
     }
 
     private void CreateShootingRangeList()
@@ -83,7 +85,7 @@ public class GameManager_script : MonoBehaviour
         {
             for (int x = 0; x < gridWidth; x++)
             {
-                shootingRangeList.Add(new Vector2(x, y));
+                shootingRangeList.Add(new Vector2Int(x, y));
             }
         }
     }
@@ -145,6 +147,7 @@ public class GameManager_script : MonoBehaviour
         {
             if (playerShip.GetComponent<Ship_script>().shipIsReadyForBattle == false)
             {
+                grid_script.DisableAllGridPosColider();
                 return;
             }
             AllShipsAreReady = true;
@@ -204,17 +207,22 @@ public class GameManager_script : MonoBehaviour
         grid_script.resetGrid();
     }
 
-    public void MakeFreeOcupiedPos(Vector2[] shipAllPos, bool isEnemy)
+    public void MakeFreeOcupiedPos(Vector2Int[] shipAllPos, bool isEnemy)
     {
         grid_script.makeFreeGridPos(shipAllPos, isEnemy);
     }
 
-    public bool IsValidPos(Vector2[] shipAllPos, bool isEnemy)
+    public bool IsValidPos(Vector2Int[] shipAllPos, bool isEnemy)
     {
         return grid_script.isValidPos(shipAllPos, isEnemy);
     }
 
-    public void OcupyGridPos(Vector2[] shipAllPos, bool isEnemy)
+    public bool IsInsideGrid(Vector2Int pos, bool isEnemy)
+    {
+        return grid_script.PosIsInsideGrid(pos, isEnemy);
+    }
+
+    public void OcupyGridPos(Vector2Int[] shipAllPos, bool isEnemy)
     {
         grid_script.ocupyGridPos(shipAllPos, isEnemy);
     }
@@ -265,43 +273,99 @@ public class GameManager_script : MonoBehaviour
         settingAirDefense = true;
     }
 
-    public void SettingAirDefense(Vector2[] shipAllPos, bool isHovering)
+    public void SettingAirDefense(GameObject Ship, bool isHovering)
     {
-        if (isHovering)
+        //Debug.Log("Ship --- " + Ship);
+
+        List<Vector2Int> AirDefenseneighbourList = CalculateClickedShipsAirDefenseNeighbours(Ship);
+
+        if (Ship.GetComponent<Ship_script>().airDiffenceisOn == false)
         {
-            foreach (Vector2 cubePos in shipAllPos)
+            if (isHovering)
             {
-                grid_script.grid_list_player[(int)cubePos.x, (int)cubePos.y].GetComponent<Cube_script>().CubeColor(Color.red);
+
+
+                foreach (Vector2Int cubePos in AirDefenseneighbourList)
+                {
+                    if (grid_script.grid_list_player[cubePos.x, cubePos.y].GetComponent<Cube_script>().isUnderAirDefense == false)
+                    {
+                        grid_script.grid_list_player[cubePos.x, cubePos.y].GetComponent<Cube_script>().CubeColor(Color.red);
+                    }
+                    
+
+                }
+
+                //foreach (Vector2 cubePos in shipAllPos)
+                //{
+                //    grid_script.grid_list_player[(int)cubePos.x, (int)cubePos.y].GetComponent<Cube_script>().CubeColor(Color.red);
+                //}
             }
-        }
-        else
-        {
-            foreach (Vector2 cubePos in shipAllPos)
+            else
             {
-                grid_script.grid_list_player[(int)cubePos.x, (int)cubePos.y].GetComponent<Cube_script>().CubeColor(Color.white);
+                foreach (Vector2Int cubePos in AirDefenseneighbourList)
+                {
+                    if (grid_script.grid_list_player[cubePos.x, cubePos.y].GetComponent<Cube_script>().isUnderAirDefense == false)
+                    {
+                        grid_script.grid_list_player[cubePos.x, cubePos.y].GetComponent<Cube_script>().CubeColor(Color.white);
+                    }
+                    
+                }
+                //foreach (Vector2 cubePos in shipAllPos)
+                //{
+                //    grid_script.grid_list_player[(int)cubePos.x, (int)cubePos.y].GetComponent<Cube_script>().CubeColor(Color.white);
+                //}
             }
         }
         
+        
     }
 
-    public void SetAirDefence(Vector2[] shipAllPos)
+    public void SetAirDefence(GameObject Ship, bool isHovering)
     {
+        List<Vector2Int> AirDefenseneighbourList = CalculateClickedShipsAirDefenseNeighbours(Ship);
 
+        foreach (Vector2Int cubePos in AirDefenseneighbourList)
+        {
+            //Debug.Log("cubePos === " + cubePos);
+            grid_script.grid_list_player[cubePos.x, cubePos.y].GetComponent<Cube_script>().isUnderAirDefense = true;
+            grid_script.grid_list_player[cubePos.x, cubePos.y].GetComponent<Cube_script>().CubeColor(Color.green);
+        }
+        settingAirDefense = false;
+        Ship.GetComponent<Ship_script>().airDiffenceisOn = true;
+    }
+
+    public List<Vector2Int> CalculateClickedShipsAirDefenseNeighbours(GameObject heveredShip)
+    {
+        //int ShipsAirDefenseNeighboursNum = clickedShip.GetComponent<Ship_script>().shipAllAerDefensePos.Count;
+        //Vector2Int[] neighbourList = new Vector2Int[ShipsAirDefenseNeighboursNum];
+
+
+        List<Vector2Int> neighbourList = new List<Vector2Int>();
+
+        neighbourList = heveredShip.GetComponent<Ship_script>().CalculateshipAllAerDefensePos(heveredShip);
+
+
+        return neighbourList;
+    }
+
+    public bool PosIsInsideGrid(Vector2Int pos, bool isEnemy)
+    {
+        return grid_script.PosIsInsideGrid(pos, isEnemy);
     }
 
     public GameObject[] CalculateClickedCubesSateliteNeighbours(GameObject clickedCube)
     {
         GameObject[] neighbourList = new GameObject[4];
-        Vector2[] neighbourList11 = new Vector2[4];
+        Vector2Int[] neighbourList11 = new Vector2Int[4];
 
         int x = (int)clickedCube.transform.position.x;
         int y = (int)clickedCube.transform.position.y;
 
-        Vector2 neighbour1Pos = new Vector2(x + 1, y);
-        Vector2 neighbour2Pos = new Vector2(x + 1, y-1);
-        Vector2 neighbour3Pos = new Vector2(x, y-1);
+        Vector2Int neighbour1Pos = new Vector2Int(x + 1, y);
+        Vector2Int neighbour2Pos = new Vector2Int(x + 1, y-1);
+        Vector2Int neighbour3Pos = new Vector2Int(x, y-1);
 
-        neighbourList11[0] = new Vector2(clickedCube.transform.position.x , clickedCube.transform.position.y);
+        neighbourList11[0] = new Vector2Int((int)clickedCube.transform.position.x , (int)clickedCube.transform.position.y);
         neighbourList11[1] = neighbour1Pos;
         neighbourList11[2] = neighbour2Pos;
         neighbourList11[3] = neighbour3Pos;
@@ -311,18 +375,18 @@ public class GameManager_script : MonoBehaviour
         {
             for (int i = 0; i < neighbourList11.Length; i++)
             {
-                neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+                neighbourList[i] = grid_script.grid_list_enemy[neighbourList11[i].x - distanceBetweenGrids, neighbourList11[i].y];
             }
         }
 
         else
         {
             // Down 
-            neighbour1Pos = new Vector2(x , y-1);
-            neighbour2Pos = new Vector2(x - 1, y - 1);
-            neighbour3Pos = new Vector2(x -1, y);
+            neighbour1Pos = new Vector2Int(x , y-1);
+            neighbour2Pos = new Vector2Int(x - 1, y - 1);
+            neighbour3Pos = new Vector2Int(x -1, y);
 
-            neighbourList11[0] = new Vector2(clickedCube.transform.position.x, clickedCube.transform.position.y);
+            neighbourList11[0] = new Vector2Int((int)clickedCube.transform.position.x, (int)clickedCube.transform.position.y);
             neighbourList11[1] = neighbour1Pos;
             neighbourList11[2] = neighbour2Pos;
             neighbourList11[3] = neighbour3Pos;
@@ -331,18 +395,18 @@ public class GameManager_script : MonoBehaviour
             {
                 for (int i = 0; i < neighbourList11.Length; i++)
                 {
-                    neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+                    neighbourList[i] = grid_script.grid_list_enemy[neighbourList11[i].x - distanceBetweenGrids, neighbourList11[i].y];
                 }
             }
 
             else
             {
                 // Left
-                neighbour1Pos = new Vector2(x - 1, y);
-                neighbour2Pos = new Vector2(x - 1, y + 1);
-                neighbour3Pos = new Vector2(x, y + 1);
+                neighbour1Pos = new Vector2Int(x - 1, y);
+                neighbour2Pos = new Vector2Int(x - 1, y + 1);
+                neighbour3Pos = new Vector2Int(x, y + 1);
 
-                neighbourList11[0] = new Vector2(clickedCube.transform.position.x, clickedCube.transform.position.y);
+                neighbourList11[0] = new Vector2Int((int)clickedCube.transform.position.x, (int)clickedCube.transform.position.y);
                 neighbourList11[1] = neighbour1Pos;
                 neighbourList11[2] = neighbour2Pos;
                 neighbourList11[3] = neighbour3Pos;
@@ -351,17 +415,17 @@ public class GameManager_script : MonoBehaviour
                 {
                     for (int i = 0; i < neighbourList11.Length; i++)
                     {
-                        neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+                        neighbourList[i] = grid_script.grid_list_enemy[neighbourList11[i].x - distanceBetweenGrids, neighbourList11[i].y];
                     }
                 }
                 else
                 {
                     // Up
-                    neighbour1Pos = new Vector2(x , y+1);
-                    neighbour2Pos = new Vector2(x + 1, y + 1);
-                    neighbour3Pos = new Vector2(x +1, y);
+                    neighbour1Pos = new Vector2Int(x , y+1);
+                    neighbour2Pos = new Vector2Int(x + 1, y + 1);
+                    neighbour3Pos = new Vector2Int(x +1, y);
 
-                    neighbourList11[0] = new Vector2(clickedCube.transform.position.x, clickedCube.transform.position.y);
+                    neighbourList11[0] = new Vector2Int((int)clickedCube.transform.position.x, (int)clickedCube.transform.position.y);
                     neighbourList11[1] = neighbour1Pos;
                     neighbourList11[2] = neighbour2Pos;
                     neighbourList11[3] = neighbour3Pos;
@@ -370,7 +434,7 @@ public class GameManager_script : MonoBehaviour
                     {
                         for (int i = 0; i < neighbourList11.Length; i++)
                         {
-                            neighbourList[i] = grid_script.grid_list_enemy[(int)neighbourList11[i].x - distanceBetweenGrids, (int)neighbourList11[i].y];
+                            neighbourList[i] = grid_script.grid_list_enemy[neighbourList11[i].x - distanceBetweenGrids, neighbourList11[i].y];
                         }
                     }
                 }
@@ -438,14 +502,14 @@ public class GameManager_script : MonoBehaviour
             yield break;
         }
 
-        Vector2 shootPos = calculateEnemyShootingPos();
-        GameObject Cube = grid_script.grid_list_player[(int)shootPos.x, (int)shootPos.y];
+        Vector2Int shootPos = calculateEnemyShootingPos();
+        GameObject Cube = grid_script.grid_list_player[shootPos.x, shootPos.y];
 
         shootingRangeList.Remove(shootPos);
         shootRocket(Cube, false);
     }
 
-    public void EnemyHitOrMissTarget(GameObject Cube, Vector2 shootPos)
+    public void EnemyHitOrMissTarget(GameObject Cube, Vector2Int shootPos)
     {
 
         if (Cube.GetComponent<Cube_script>().hitTheTarget())
@@ -473,9 +537,9 @@ public class GameManager_script : MonoBehaviour
         }
     }
 
-    private Vector2 calculateEnemyShootingPos()
+    private Vector2Int calculateEnemyShootingPos()
     {
-        Vector2 shootPos;
+        Vector2Int shootPos;
 
         if (previousSuccessfullHitList.Count > 0 && potencialShootingPosList.Count > 0)
         {
@@ -491,17 +555,17 @@ public class GameManager_script : MonoBehaviour
         return shootPos;
     }
 
-    private void UpdateHuntingMode(Vector2 hitPos)
+    private void UpdateHuntingMode(Vector2Int hitPos)
     {
         previousSuccessfullHitList.Add(hitPos);
         potencialShootingPosList = GetPotentialShootingPositions(hitPos);
     }
 
-    private List<Vector2> GetPotentialShootingPositions(Vector2 hitPos)
+    private List<Vector2Int> GetPotentialShootingPositions(Vector2Int hitPos)
     {
-        List<Vector2> potentialPositions = new List<Vector2>();
-        int x = (int)hitPos.x;
-        int y = (int)hitPos.y;
+        List<Vector2Int> potentialPositions = new List<Vector2Int>();
+        int x = hitPos.x;
+        int y = hitPos.y;
 
         // If we have only one hit, add all four adjacent positions
         if (previousSuccessfullHitList.Count == 1)
@@ -514,9 +578,9 @@ public class GameManager_script : MonoBehaviour
         else if (previousSuccessfullHitList.Count > 1)
         {
             // Determine the orientation of the ship
-            Vector2 firstHitPos = previousSuccessfullHitList[0];
-            int firstHitX = (int)firstHitPos.x;
-            int firstHitY = (int)firstHitPos.y;
+            Vector2Int firstHitPos = previousSuccessfullHitList[0];
+            int firstHitX = firstHitPos.x;
+            int firstHitY = firstHitPos.y;
 
             if (firstHitX == x) // Ship is vertical
             {
@@ -525,11 +589,11 @@ public class GameManager_script : MonoBehaviour
                 AddPotentialPosition(potentialPositions, x, y - 1);
                 AddPotentialPosition(potentialPositions, x, y + 1);
 
-                if (previousSuccessfullHitList.Contains(new Vector2(x, y - 1)))
+                if (previousSuccessfullHitList.Contains(new Vector2Int(x, y - 1)))
                 {
                     AddPotentialPosition(potentialPositions, x, y - 2);
                 }
-                if (previousSuccessfullHitList.Contains(new Vector2(x, y + 1)))
+                if (previousSuccessfullHitList.Contains(new Vector2Int(x, y + 1)))
                 {
                     AddPotentialPosition(potentialPositions, x, y + 2);
                 }
@@ -542,11 +606,11 @@ public class GameManager_script : MonoBehaviour
                 AddPotentialPosition(potentialPositions, x - 1, y);
                 AddPotentialPosition(potentialPositions, x + 1, y);
 
-                if (previousSuccessfullHitList.Contains(new Vector2(x - 1, y)))
+                if (previousSuccessfullHitList.Contains(new Vector2Int(x - 1, y)))
                 {
                     AddPotentialPosition(potentialPositions, x - 2, y);
                 }
-                if (previousSuccessfullHitList.Contains(new Vector2(x + 1, y)))
+                if (previousSuccessfullHitList.Contains(new Vector2Int(x + 1, y)))
                 {
                     AddPotentialPosition(potentialPositions, x + 2, y);
                 }
@@ -560,28 +624,28 @@ public class GameManager_script : MonoBehaviour
         return potentialPositions;
     }
 
-    private void AddExtraPositions(List<Vector2> potentialPositions, int x, int y)
+    private void AddExtraPositions(List<Vector2Int> potentialPositions, int x, int y)
     {
-        if (previousSuccessfullHitList.Contains(new Vector2(x, y - 1)))
+        if (previousSuccessfullHitList.Contains(new Vector2Int(x, y - 1)))
         {
             AddPotentialPosition(potentialPositions, x, y - 2);
         }
-        if (previousSuccessfullHitList.Contains(new Vector2(x, y + 1)))
+        if (previousSuccessfullHitList.Contains(new Vector2Int(x, y + 1)))
         {
             AddPotentialPosition(potentialPositions, x, y + 2);
         }
     }
 
-    private void AddPotentialPosition(List<Vector2> positions, int x, int y)
+    private void AddPotentialPosition(List<Vector2Int> positions, int x, int y)
     {
         if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight)
         {
-            Vector2 pos = new Vector2(x, y);
+            Vector2Int  pos = new Vector2Int(x, y);
             if (shootingRangeList.Contains(pos))
             {
                 positions.Add(pos);
             }
-        }
+        }                                                                   
     }
 
     public void HitEnemyShip(Vector2 bulletPos)
