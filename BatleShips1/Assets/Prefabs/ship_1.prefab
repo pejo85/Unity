@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7695379857620826593}
   - component: {fileID: 4215011312750456029}
-  - component: {fileID: 5016363114890738319}
   - component: {fileID: -1102435825779957619}
   - component: {fileID: 1733207509936818260}
   - component: {fileID: 4033563704773568483}
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_LocalScale: {x: 0.38000003, y: 0.38000003, z: 0.38000003}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5016363114890738319
+--- !u!114 &-1102435825779957619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,49 +96,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6512535449233725241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41a0c761d5da8cb4c880e904cf3f05c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ship_grid_offset: 0
-  shipAllPos:
-  - {x: 0, y: 0}
-  isEnemy: 0
-  shipIsVertical: 0
-  shipIsReadyForBattle: 0
-  shipCanMove: 1
-  isDraggingShip: 0
-  mouseClicked: 0
-  shipCanRotate: 1
-  shipPlaced: 0
-  shipReset: 0
-  shipStartingPos: {x: 0, y: 0}
-  gameOver: 0
-  shield: 0
-  airDiffenceisOn: 0
-  gameStarted: 0
-  shipAllAerDefensePos:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  hitCount: 0
---- !u!114 &-1102435825779957619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6512535449233725241}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 329c3b1d56855d34abdf670e5dfba985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship_grid_offset: 0
+  shipAllPosArray:
+  - {x: 0, y: 0}
+  isPlayer: 1
+  shipIsHorisontal: 1
+  shipStartingPos: {x: 0, y: 0}
+  shipCanMove: 1
+  shipCanRotate: 1
+  shipIsDragging: 0
+  mouseIsClickedOnShip: 0
+  shipIsDeployed: 0
+  airDiffenceIsActivated: 0
+  shipIsReadyForBattle: 0
+  gameStarted: 0
+  gameOver: 0
+  shipAllAirDefensePos: []
+  shipHitCount: 0
 --- !u!50 &1733207509936818260
 Rigidbody2D:
   serializedVersion: 4

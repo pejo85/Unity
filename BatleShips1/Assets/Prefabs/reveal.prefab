@@ -95,7 +95,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2621485719269429318}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68ae97711cc82d94480ae4750b2c7c2a, type: 3}
   m_Name: 
@@ -106,7 +106,6 @@ MonoBehaviour:
   isEnemyBoard: 0
   wasShot: 0
   gameStarted: 0
-  gameOver: 0
   isRevealed: 0
   isUnderAirDefense: 0
 --- !u!114 &-212015030226410799
@@ -116,11 +115,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2621485719269429318}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d20c274c00d61f84c937de645f0aa2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  mouseIsClicked: 0
+  isEnemyBoard: 0
+  isPlayerBoard: 0
+  isOcupied: 0
+  isRevealed: 0
+  isUnderAirDefense: 0
+  wasShot: 0
 --- !u!50 &7008327069858828281
 Rigidbody2D:
   serializedVersion: 4

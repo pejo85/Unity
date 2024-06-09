@@ -1,175 +1,55 @@
-//using System.Collections;
-//using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Cube_script : MonoBehaviour
 {
-    [SerializeField] private GameObject GameManager;
-
+    private GameObject gameManager;
     private GameManager_script gameManager_script;
 
+    private Vector3 initialMousePos;
+    private Vector3 mouseOffset;
+    public bool mouseIsClicked;
 
-    [SerializeField] public bool isOcupied = false;
-    //private bool isColided = false;
-    public bool mouseClicked = false;
-    public bool isEnemyBoard = false;
-    public bool wasShot = false;
-    [SerializeField] private bool gameStarted;
+    public bool isEnemyBoard;
+    public bool isPlayerBoard;
+
+    public bool isOcupied;
+    public bool isRevealed;
+    public bool isUnderAirDefense;
+    public bool wasShot;
+
+    private bool gameStarted;
 
     //public bool gameOver = false;
-
-    private Vector3 mouseOffset;
-    private Vector3 initialMousePos;
-
-    GameObject[] CubesSateliteNeighboursList = new GameObject[4];
+    //GameObject[] CubesSateliteNeighboursList = new GameObject[4];
 
 
-    public bool isRevealed = false;
-    public bool isUnderAirDefense;
+    
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager");
+        gameManager_script = gameManager.GetComponent<GameManager_script>();
+    }
 
-    private void Start()
+    // Update is called once per frame
+    void Update()
     {
         
-        gameManager_script = GameManager.GetComponent<GameManager_script>();
     }
 
-    private void Update()
+    public void ResetCubeProperties()
     {
-        gameStarted = gameManager_script.gameStarted;
-
-    }
-
-    private void OnMouseOver()
-    {
-        //Debug.Log("isHovering on = " + gameObject.name);
-        if (isEnemyBoard && gameManager_script.sateliteIsWatching)
-        {
-            CubesSateliteNeighboursList = gameManager_script.CalculateClickedCubesSateliteNeighbours(this.gameObject);
-            gameManager_script.SateliteHoversOverTile(CubesSateliteNeighboursList);
-        }
-        //if (!isEnemyBoard && gameManager_script.AllShipsAreReady && !gameStarted)
-        //{
-        //    CubeColor(Color.yellow);
-        //}
+        mouseIsClicked = false;
+        isOcupied = false;
+        isRevealed = false;
+        isUnderAirDefense = false;
+        wasShot = false;
+        gameStarted = false;
         
     }
-
-    private void OnMouseExit()
-    {
-        if (isEnemyBoard && gameManager_script.sateliteIsWatching)
-        {
-            gameManager_script.SateliteHoversOverExitTile(CubesSateliteNeighboursList);
-        }
-        //if (!isEnemyBoard && gameManager_script.AllShipsAreReady && !gameStarted)
-        //{
-        //    CubeColor(Color.white);
-        //}
-
-
-    }
-
-    private void OnMouseDown()
-    {
-        mouseClicked = false;
-
-        if (gameStarted)
-        {
-            initialMousePos = GetMouseWorldPos();
-        }
-    }
-
-    private void OnMouseUp()
-    {
-        mouseClicked = true;
-        //Debug.Log(gameManager_script.sateliteIsWatching);
-        
-        if (gameStarted)
-        {
-            if (gameManager_script.sateliteIsWatching)
-            {
-                gameManager_script.sateliteRevealsEnemyTiles(this.gameObject);
-                gameManager_script.sateliteIsWatching = false;
-            }
-
-            else if (gameManager_script.playerMove)
-            {
-                // When player shoots the enemy
-                if (mouseClicked && isEnemyBoard && !gameManager_script.sateliteIsWatching)
-                {
-                    gameManager_script.PlayerShootsToEnemy(this.gameObject);
-                }
-            }
-
-        }
-
-    }
-
-    public void RevealTile()
-    {
-        GetComponent<SpriteRenderer>().sortingOrder = 0;
-        isRevealed = true;
-        GetComponent<SpriteRenderer>().color = Color.white;
-    }
-
-    public bool hitTheTarget()
-    {
-        // Hit the target
-        if (isOcupied)
-        {
-            return true;
-        }
-
-        // If missed
-        return false;
-
-    }
-
-    private Vector3 GetMouseWorldPos()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        return Camera.main.ScreenToWorldPoint(mousePos);
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision != null)
-        {
-            //isColided = true;
-            //if (collision.gameObject.tag == "Ship")
-            //{
-            //    if (collision.GetComponent<Ship_script>().shipIsReadyForBattle == false)
-            //    {
-            //        IsOcupiedWhileDragging();
-            //    }
-            //
-            //}
-
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        //isColided = false ;
-        //if (collision.gameObject.tag == "Ship")
-        //{
-        //    if (!isOcupied)
-        //    {
-        //        //GetComponent<SpriteRenderer>().color = Color.white;
-        //        //collision.GetComponent<SpriteRenderer>().color = Color.white;
-        //    }            
-        //}
-        
-    }
-
-    //public void IsOcupiedWhileDragging()
-    //{
-    //    if (isOcupied)
-    //    {
-    //        //GetComponent<SpriteRenderer>().color = Color.red;
-    //    }
-    //}
 
     public void IsOcupied()
     {
@@ -181,20 +61,9 @@ public class Cube_script : MonoBehaviour
         isOcupied = false;
     }
 
-    //private void checkIfStaysOcupied()
-    //{
-    //    if (!isColided && isOcupied)
-    //        {
-    //            //GetComponent<SpriteRenderer>().color = Color.white;
-    //        }
-    //}
-
     public void CubeColor(Color color)
     {
         GetComponent<SpriteRenderer>().color = color;
     }
 
 }
-
-
-

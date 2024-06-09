@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4627890020724398151}
   - component: {fileID: 1827874611630034824}
-  - component: {fileID: 6059390749287720301}
   - component: {fileID: 2830211231378650221}
   - component: {fileID: 4065898495250215977}
   - component: {fileID: 4640976059661149198}
@@ -88,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6059390749287720301
+--- !u!114 &2830211231378650221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,57 +96,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 4575047503894455286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41a0c761d5da8cb4c880e904cf3f05c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ship_grid_offset: 1
-  shipAllPos:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  isEnemy: 0
-  shipIsVertical: 0
-  shipIsReadyForBattle: 0
-  shipCanMove: 1
-  isDraggingShip: 0
-  mouseClicked: 0
-  shipCanRotate: 1
-  shipPlaced: 0
-  shipReset: 0
-  shipStartingPos: {x: 0, y: 0}
-  gameOver: 0
-  shield: 0
-  airDiffenceisOn: 0
-  gameStarted: 0
-  shipAllAerDefensePos:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  hitCount: 0
---- !u!114 &2830211231378650221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4575047503894455286}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 329c3b1d56855d34abdf670e5dfba985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship_grid_offset: 1
+  shipAllPosArray:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  isPlayer: 1
+  shipIsHorisontal: 1
+  shipStartingPos: {x: 0, y: 0}
+  shipCanMove: 1
+  shipCanRotate: 1
+  shipIsDragging: 0
+  mouseIsClickedOnShip: 0
+  shipIsDeployed: 0
+  airDiffenceIsActivated: 0
+  shipIsReadyForBattle: 0
+  gameStarted: 0
+  gameOver: 0
+  shipAllAirDefensePos: []
+  shipHitCount: 0
 --- !u!50 &4065898495250215977
 Rigidbody2D:
   serializedVersion: 4
