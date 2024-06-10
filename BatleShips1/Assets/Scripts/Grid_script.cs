@@ -15,6 +15,7 @@ public class Grid_script : MonoBehaviour
     private int distanceBetweenGrids;
 
     public bool gameOver = false;
+    public bool gameStarted;
 
     private void Awake()
     {
@@ -298,6 +299,79 @@ public class Grid_script : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    public void GameHasStarted(bool gameHasStarted)
+    {
+        //  Player grid
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                if (grid_list_player[x, y].gameObject != null)
+                {
+                    grid_list_player[x, y].gameObject.GetComponent<Cube_script>().GameStarted(gameHasStarted);
+                }
+
+            }
+        }
+        //  Enemy grid
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                if (grid_list_player[x, y].gameObject != null)
+                {
+                    grid_list_enemy[x, y].gameObject.GetComponent<Cube_script>().GameStarted(gameHasStarted);
+                }
+            }
+        }
+    }
+
+    public bool sateliteNeighboursIsValidPos(Vector2Int[] neighbourPosList, bool isPlayer)
+    {
+        // Enemy
+        if (!isPlayer)
+        {
+            for (int y = 0; y < neighbourPosList.Length; y++)
+            {
+            }
+            if (ShipIsInsideGrid(neighbourPosList, isPlayer))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void makeFreeGridPos(Vector2Int[] shipAllPos, bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            for (int i = 0; i < shipAllPos.Length; i++)
+            {
+                grid_list_player[shipAllPos[i].x, shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsFree();
+            }
+        }
+        else // Enemy
+        {
+            for (int i = 0; i < shipAllPos.Length; i++)
+            {
+                grid_list_enemy[shipAllPos[i].x - distanceBetweenGrids, shipAllPos[i].y].gameObject.GetComponent<Cube_script>().IsFree();
+            }
+        }
+
+    }
+
+
+
+    public void changeGridCubeColors(Vector2[] shipAllPos, Color color1)
+    {
+        for (int i = 0; i < shipAllPos.Length; i++)
+        {
+            Debug.Log(shipAllPos[1] + "," + color1);
+            grid_list_player[(int)shipAllPos[i].x, (int)shipAllPos[i].y].gameObject.GetComponent<SpriteRenderer>().color = color1;
         }
     }
 

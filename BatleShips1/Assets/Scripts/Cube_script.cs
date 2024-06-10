@@ -19,7 +19,7 @@ public class Cube_script : MonoBehaviour
     public bool isUnderAirDefense;
     public bool wasShot;
 
-    private bool gameStarted;
+    [SerializeField] private bool gameStarted;
 
     //public bool gameOver = false;
     //GameObject[] CubesSateliteNeighboursList = new GameObject[4];
@@ -34,11 +34,66 @@ public class Cube_script : MonoBehaviour
         gameManager_script = gameManager.GetComponent<GameManager_script>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseOver()
     {
-        
+        if (SateliteIsWatching())
+        {
+            gameManager_script.SateliteHoversOverCube(this.gameObject);
+        }
     }
+
+    private void OnMouseExit()
+    {
+        if ( SateliteIsWatching() )
+        {
+            gameManager_script.SateliteHoversExitCube(this.gameObject);
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        mouseIsClicked = false;
+
+        if (gameStarted)
+        {
+            initialMousePos = GetMouseWorldPos();
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        mouseIsClicked = true;
+    
+        if (gameStarted)
+        {
+            if (SateliteIsWatching())
+            {
+                gameManager_script.SateliteRevealsEnemyTiles(this.gameObject);
+                gameManager_script.SateliteStopsWatching();
+            }
+    
+            //else if (gameManager_script.playerMove)
+            //{
+            //    // When player shoots the enemy
+            //    if (mouseClicked && isEnemyBoard && !gameManager_script.sateliteIsWatching)
+            //    {
+            //        gameManager_script.PlayerShootsToEnemy(this.gameObject);
+            //    }
+            //}
+    
+        }
+    
+    }
+
+
+    private Vector3 GetMouseWorldPos()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        return Camera.main.ScreenToWorldPoint(mousePos);
+    }
+
+
+
 
     public void ResetCubeProperties()
     {
@@ -61,7 +116,39 @@ public class Cube_script : MonoBehaviour
         isOcupied = false;
     }
 
-    public void CubeColor(Color color)
+    public void GameStarted(bool gameHasStarted)
+    {
+        gameStarted = gameHasStarted;
+    }
+
+    public void RevealTile()
+    {
+        GetComponent<SpriteRenderer>().sortingOrder = 0;
+        isRevealed = true;
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public bool HitTheTarget()
+    {
+        // Hit the target
+        if (isOcupied)
+        {
+            return true;
+        }
+
+        // If missed
+        return false;
+    }
+
+    public bool SateliteIsWatching()
+    {
+        return isEnemyBoard && gameManager_script.sateliteIsWatching;
+    }
+
+
+
+
+    public void CubeColorChange(Color color)
     {
         GetComponent<SpriteRenderer>().color = color;
     }

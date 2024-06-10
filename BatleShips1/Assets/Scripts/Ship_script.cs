@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Ship_script : MonoBehaviour
@@ -55,7 +56,8 @@ public class Ship_script : MonoBehaviour
 
     void Start()
     {
-
+        shipStartingPos = transform.position;
+        shipLastLegitPos = shipStartingPos;
     }
 
     void Update()
@@ -63,14 +65,72 @@ public class Ship_script : MonoBehaviour
         
     }
 
+    private void OnMouseOver()
+    {
+        if (SettingUpAirDefense())
+        {
+            gameManager_script.SettingAirDefense(this.gameObject, true);
+        }
+
+    }
+
+    private void OnMouseExit()
+    {
+        if (SettingUpAirDefense())
+        {
+            gameManager_script.SettingAirDefense(this.gameObject, false);
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        if (shipCanMove)
+        {
+            initialMousePos = GetMouseWorldPos();
+
+            if (ShipRedeploy()) // If ship is deployed on the grid and I want to redeploy
+            {
+                shipIsReadyForBattle = false;
+                makeFreeOcupiedPos();
+            }
+            mouseOffset = gameObject.transform.position - GetMouseWorldPos();
+            
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        if (!shipIsDragging)
+        {
+            mouseIsClickedOnShip = true;
+        }
+
+        //if (mouseClicked && shipCanRotate && !gameManager_script.settingAirDefense)
+        //{
+        //    clickOnShip();
+        //}
+        //
+        //if (shipCanMove && shipIsDragging)
+        //{
+        //    endDraggingShip();
+        //}
+        if (SettingUpAirDefense())
+        {
+            ActivateAirDefense();
+            //gameManager_script.SetAirDefence(this.gameObject, false);
+        }
+
+    }
+
+
+    private Vector3 GetMouseWorldPos()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        return Camera.main.ScreenToWorldPoint(mousePos);
+    }
 
     public void placeShipRandomly()
     {
-        if (!isPlayer)
-        {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-
         ChooseShipOrientation();
 
         // Max try to deploy ship --> deployShipMaxTryNumber
@@ -85,6 +145,11 @@ public class Ship_script : MonoBehaviour
             Debug.Log("Failed to place Enemy ship after " + deployShipMaxTryNumber + " attempts.");
         }
         deployShipTryNumber = 0;
+
+        if (!isPlayer)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     public void DeployShip(Vector2Int currentPos)
@@ -145,11 +210,12 @@ public class Ship_script : MonoBehaviour
 
     private void OcupyGridPos()
     {
+        shipAllAirDefensePos = CalculateshipAllAerDefensePos(this.gameObject);
+        shipIsDeployed = true;
         shipIsReadyForBattle = true;
         gameManager_script.OcupyGridPos(shipAllPosArray, isPlayer);
         gameManager_script.CheckIfGameIsReady(); // if it is last ship that was deployed
-        shipIsDeployed = true;
-        shipAllAirDefensePos = CalculateshipAllAerDefensePos(this.gameObject);
+        
     }
 
     public void ResetShipProperties()
@@ -344,4 +410,29 @@ public class Ship_script : MonoBehaviour
         //return shipAllAerDefensePos;
     }
 
+    public bool SettingUpAirDefense()
+    {
+        return isPlayer && gameManager_script.allShipsAreReadyForBattle && !gameStarted && gameManager_script.settingUpAirDefense && !airDiffenceIsActivated;
+    }
+
+    public void ActivateAirDefense()
+    {
+        gameManager_script.ActivateAirDefense(this.gameObject);
+        airDiffenceIsActivated = true;
+    }
+
+    public bool ShipRedeploy()
+    {
+        return shipIsReadyForBattle && !gameManager_script.settingUpAirDefense;
+    }
+
+    private void makeFreeOcupiedPos()
+    {
+        gameManager_script.MakeFreeOcupiedPos(shipAllPosArray, isPlayer);
+    }
+
 }
+
+
+
+
