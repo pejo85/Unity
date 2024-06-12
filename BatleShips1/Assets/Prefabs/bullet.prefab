@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 3804620317910553284}
   - component: {fileID: 6068659027734438057}
   - component: {fileID: 6510445142336965153}
-  - component: {fileID: 1548068920813627352}
-  - component: {fileID: 3911694538713840461}
-  - component: {fileID: 3496767106240095925}
-  - component: {fileID: 3342397793178635192}
+  - component: {fileID: -1537469389080396576}
+  - component: {fileID: 7734884479662798547}
+  - component: {fileID: 8773807207590366104}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Bullet
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: 8a5c6d8b6ee730d4a8a56761456d6355, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -110,22 +109,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1548068920813627352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8068238876936778857}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec5bbba4ec00bd49bf33cdd43e57398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPosition: {x: 10, y: 0}
-  speed: 9
-  isPlayerShot: 0
---- !u!114 &3911694538713840461
+--- !u!114 &-1537469389080396576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,10 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998b55feb8e1b1e48a264e3fc64fca9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0}
-  speed: 10
+  rocketNormalSpeed: 10
+  rocketInterseptionlSpeed: 15
   isPlayerShot: 0
---- !u!50 &3496767106240095925
+  interseptingRocket: 0
+--- !u!50 &7734884479662798547
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -167,7 +152,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &3342397793178635192
+--- !u!61 &8773807207590366104
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,7 +184,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.041656792, y: 0.033740785}
+  m_Offset: {x: 0.27506232, y: 0.024270266}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -210,5 +195,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1110574, y: 0.095901065}
+  m_Size: {x: 0.34153593, y: 0.27998376}
   m_EdgeRadius: 0

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8719603440534370071}
   - component: {fileID: 6379306236064559119}
-  - component: {fileID: 7633515769827609475}
   - component: {fileID: -212015030226410799}
   - component: {fileID: 7008327069858828281}
   - component: {fileID: 601899926707569808}
@@ -76,9 +75,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 1f1ea4901c4b7014eaac87daaf877304, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7058824}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,26 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7633515769827609475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2621485719269429318}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ae97711cc82d94480ae4750b2c7c2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
-  isOcupied: 0
-  mouseClicked: 0
-  isEnemyBoard: 0
-  wasShot: 0
-  gameStarted: 0
-  isRevealed: 0
-  isUnderAirDefense: 0
 --- !u!114 &-212015030226410799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20c274c00d61f84c937de645f0aa2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
   mouseIsClicked: 0
   isEnemyBoard: 0
   isPlayerBoard: 0
@@ -128,6 +106,7 @@ MonoBehaviour:
   isRevealed: 0
   isUnderAirDefense: 0
   wasShot: 0
+  gameStarted: 0
 --- !u!50 &7008327069858828281
 Rigidbody2D:
   serializedVersion: 4

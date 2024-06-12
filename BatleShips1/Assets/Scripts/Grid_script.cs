@@ -49,6 +49,8 @@ public class Grid_script : MonoBehaviour
                 grid_list_player[x, y] = Instantiate(cube, new Vector2(x, y), Quaternion.identity);
                 grid_list_player[x, y].transform.SetParent(GameObject.Find("Grid").transform);
                 grid_list_player[x, y].GetComponent<SpriteRenderer>().color = Color.white;
+                grid_list_player[x, y].GetComponent<SpriteRenderer>().color.a.Equals(0.5f);  // AR MUSHAOBSSSSSSSSSSSSS!!!!!!!!!
+                grid_list_player[x, y].GetComponent<Cube_script>().isPlayerBoard = true;
             }
         }
     }
@@ -62,7 +64,7 @@ public class Grid_script : MonoBehaviour
                 grid_list_enemy[x, y] = Instantiate(Cube, new Vector2(x + distanceBetweenGrids, y), Quaternion.identity);
                 grid_list_enemy[x, y].transform.SetParent(GameObject.Find("Grid").transform);
                 grid_list_enemy[x, y].GetComponent<Cube_script>().isEnemyBoard = true;
-                grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 5;
+                grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 30;
                 grid_list_enemy[x, y].GetComponent<SpriteRenderer>().color = Color.gray;
             }
         }
@@ -364,7 +366,21 @@ public class Grid_script : MonoBehaviour
 
     }
 
+    public bool isInsideGridPotencialShootingList(Vector2Int potencialPos)
+    {
+        if (potencialPos.x < grid_list_player[0, 0].transform.position.x || potencialPos.x > grid_list_player[gridWidth - 1, gridHeight - 1].transform.position.x)
+        {
+            //NOT INSIDE GRID on X axis
+            return false;
+        }
 
+        if (potencialPos.y < grid_list_player[0, 0].transform.position.y || potencialPos.y > grid_list_player[gridWidth - 1, gridHeight - 1].transform.position.y)
+        {
+            //NOT INSIDE GRID on Y axis
+            return false;
+        }
+        return true;
+    }
 
     public void changeGridCubeColors(Vector2[] shipAllPos, Color color1)
     {

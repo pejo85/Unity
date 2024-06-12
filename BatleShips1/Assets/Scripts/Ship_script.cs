@@ -60,11 +60,6 @@ public class Ship_script : MonoBehaviour
         shipLastLegitPos = shipStartingPos;
     }
 
-    void Update()
-    {
-        
-    }
-
     private void OnMouseOver()
     {
         if (SettingUpAirDefense())
@@ -98,6 +93,23 @@ public class Ship_script : MonoBehaviour
         }
     }
 
+    private void OnMouseDrag()
+    {
+        if (shipCanMove)
+        {
+            if (!shipIsDragging && Vector3.Distance(initialMousePos, GetMouseWorldPos()) > dragThreshold)
+            {
+                shipIsDragging = true;
+            }
+
+            if (shipIsDragging)
+            {
+                transform.position = GetMouseWorldPos() + mouseOffset;
+                Vector2Int temp_pos = Utility_script.round_pos(transform.position);
+            }
+        }
+    }
+
     private void OnMouseUp()
     {
         if (!shipIsDragging)
@@ -105,15 +117,15 @@ public class Ship_script : MonoBehaviour
             mouseIsClickedOnShip = true;
         }
 
-        //if (mouseClicked && shipCanRotate && !gameManager_script.settingAirDefense)
-        //{
-        //    clickOnShip();
-        //}
-        //
-        //if (shipCanMove && shipIsDragging)
-        //{
-        //    endDraggingShip();
-        //}
+        if (mouseIsClickedOnShip && shipCanRotate && !gameManager_script.settingUpAirDefense)
+        {
+            clickOnShip();
+        }
+        
+        if (shipCanMove && shipIsDragging)
+        {
+            endDraggingShip();
+        }
         if (SettingUpAirDefense())
         {
             ActivateAirDefense();
@@ -122,6 +134,49 @@ public class Ship_script : MonoBehaviour
 
     }
 
+    private void clickOnShip()
+    {
+        Vector2Int currentPos = new Vector2Int(shipAllPosArray[0].x, shipAllPosArray[0].y);
+
+        ChangeShipOrientation();
+        makeFreeOcupiedPos(); // Clear current ocupied pos
+        DeployShip(currentPos);
+
+        mouseIsClickedOnShip = false;
+    }
+
+    private void endDraggingShip()
+    {
+        Vector2Int currentPosRounded = Vector2Int.zero;
+
+        // Ship is in Horisontal mode
+        if (shipIsHorisontal) 
+        {
+            currentPosRounded = Utility_script.round_pos(transform.position - new Vector3(ship_grid_offset, 0, 0));
+        }
+        else // Vertical
+        {
+            currentPosRounded = Utility_script.round_pos(transform.position - new Vector3(0, ship_grid_offset, 0));
+        }
+
+        ShipAllPosCalculate(currentPosRounded);
+
+        if (gameManager_script.IsValidPos(shipAllPosArray, isPlayer))
+        {
+            DeployShip(currentPosRounded);
+        }
+        else
+        {
+            transform.position = shipLastLegitPos;
+            ShipAllPosCalculate(currentPosRounded);
+            UpdateShipPos();
+
+
+
+
+        }
+        shipIsDragging = false;
+    }
 
     private Vector3 GetMouseWorldPos()
     {
@@ -239,23 +294,6 @@ public class Ship_script : MonoBehaviour
         {
             MakeShipHorizontal();
         }
-
-
-
-
-        //shipReset = true;
-        //transform.position = shipStartingPos;
-        //shipIsReadyForBattle = false;
-        //shipPlaced = false;
-        //shipAllPosReset();
-        //if (shipIsVertical)
-        //{
-        //    makeShipHorizontal();
-        //}
-        //
-        //
-        //shipReset = false;
-
     }
 
     private void ShipAllPosReset()
@@ -300,10 +338,10 @@ public class Ship_script : MonoBehaviour
              // when placed automated, default position is horisontal, so for Enemy there is no need to rotate second time
             if (isPlayer)
             {
-                //if (mouseIsClickedOnShip) // if rotate manually , then needed to change rotation horisontally - when placed automated, default position is horisontal, so there is no need to rotate second time
-                //{
-                //    transform.Rotate(0, 0, -90);
-                //}
+                if (mouseIsClickedOnShip) // if rotate manually , then needed to change rotation horisontally - when placed automated, default position is horisontal, so there is no need to rotate second time
+                {
+                    transform.Rotate(0, 0, -90);
+                }
                 //if (shipReset)
                 //{
                 //    transform.Rotate(0, 0, -90);
@@ -430,6 +468,24 @@ public class Ship_script : MonoBehaviour
     {
         gameManager_script.MakeFreeOcupiedPos(shipAllPosArray, isPlayer);
     }
+
+    public bool ShipIsAlive()
+    {
+        if (shipHitCount < shipAllPosArray.Length)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void DestroyShip()
+    {
+        this.transform.SetParent(GameObject.Find("DestroyedShips").transform);
+    }
+
+
+
+
 
 }
 

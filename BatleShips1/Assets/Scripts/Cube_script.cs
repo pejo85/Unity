@@ -71,29 +71,24 @@ public class Cube_script : MonoBehaviour
                 gameManager_script.SateliteRevealsEnemyTiles(this.gameObject);
                 gameManager_script.SateliteStopsWatching();
             }
-    
-            //else if (gameManager_script.playerMove)
-            //{
-            //    // When player shoots the enemy
-            //    if (mouseClicked && isEnemyBoard && !gameManager_script.sateliteIsWatching)
-            //    {
-            //        gameManager_script.PlayerShootsToEnemy(this.gameObject);
-            //    }
-            //}
+            else if (gameManager_script.playerMove)
+            {
+                // When player shoots the enemy
+                if (PlayerCanShoot() )
+                {
+                    gameManager_script.PlayerShootsToEnemy(this.gameObject);
+                }
+            }
     
         }
     
     }
-
 
     private Vector3 GetMouseWorldPos()
     {
         Vector3 mousePos = Input.mousePosition;
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
-
-
-
 
     public void ResetCubeProperties()
     {
@@ -145,8 +140,10 @@ public class Cube_script : MonoBehaviour
         return isEnemyBoard && gameManager_script.sateliteIsWatching;
     }
 
-
-
+    public bool PlayerCanShoot()
+    {
+        return mouseIsClicked && isEnemyBoard && !gameManager_script.sateliteIsWatching;
+    }
 
     public void CubeColorChange(Color color)
     {
