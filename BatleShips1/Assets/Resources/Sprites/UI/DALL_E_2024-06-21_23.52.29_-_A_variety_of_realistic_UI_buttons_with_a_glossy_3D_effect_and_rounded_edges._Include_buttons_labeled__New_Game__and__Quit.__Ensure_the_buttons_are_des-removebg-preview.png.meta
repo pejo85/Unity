@@ -1,0 +1,448 @@
+fileFormatVersion: 2
+guid: 5ff483f50b184b045816e23b83f86888
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 350
+        width: 101
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1e7154f02040af41a047944acd78b5b
+      internalID: -726573324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 351
+        width: 104
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25bf73a6afd2a7a4093dd90ac691d13c
+      internalID: -1331561620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 350
+        width: 105
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33a1442d843d21a4aa4dfe26671f8f8a
+      internalID: -1664809389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 350
+        width: 105
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89adfeca1f7902d4a84828aad022bd02
+      internalID: -272092866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 233
+        width: 101
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77a5a38fa7211d742aa1a6d2415841a1
+      internalID: 1079623175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 233
+        width: 104
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4fc00c9249f68447bd992e449295ee7
+      internalID: -1172579617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 232
+        width: 104
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60ae0db50b37feb43849eee91ffa2b06
+      internalID: -2010627504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 233
+        width: 104
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c0fb4775da0ba14aaee33196a48f82b
+      internalID: -31096656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 120
+        width: 100
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0092f207f8f4e24588b1824f3653b21
+      internalID: -1082938280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 127
+        width: 230
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ba8745d86540134db3e2ae5698d8800
+      internalID: 2077534459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_10
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 121
+        width: 103
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb968ba8be9ef3d479e08e2be0eb6849
+      internalID: -1874898439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_11
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 9
+        width: 100
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0afed9a32ed15a14580f23e478810a38
+      internalID: 536546772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_12
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 17
+        width: 230
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 117103fc118a2d2439942b43d9d32639
+      internalID: -1892943842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 9
+        width: 103
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f02641c546956ce48b727840c57bb7bc
+      internalID: 1317413435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_0: -726573324
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_1: -1331561620
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_10: -1874898439
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_11: 536546772
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_12: -1892943842
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_13: 1317413435
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_2: -1664809389
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_3: -272092866
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_4: 1079623175
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_5: -1172579617
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_6: -2010627504
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_7: -31096656
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_8: -1082938280
+      DALL_E_2024-06-21_23.52.29_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._Include_buttons_labeled__New_Game__and__Quit.__Ensure_the_buttons_are_des-removebg-preview_9: 2077534459
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

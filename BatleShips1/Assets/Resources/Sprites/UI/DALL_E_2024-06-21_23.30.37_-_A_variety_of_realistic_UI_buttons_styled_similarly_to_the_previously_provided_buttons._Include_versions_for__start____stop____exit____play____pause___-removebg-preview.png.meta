@@ -1,0 +1,558 @@
+fileFormatVersion: 2
+guid: c87034fa500ece449b3d6aa8687ece7b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 389
+        width: 105
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78d32d256dff38f4691d68b478bca516
+      internalID: -416835532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 389
+        width: 104
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc9d868b7f4b3d04599bf36e92091169
+      internalID: -2141513893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 388
+        width: 105
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5532a36aef2e1d41ac5cc9fc9b84a63
+      internalID: -734518401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 389
+        width: 103
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f185ac82d56bf44bb328ee4c0bea33a
+      internalID: -512851460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 285
+        width: 100
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8988f94ea64e9c64cbd94b096053a185
+      internalID: 69697048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 284
+        width: 103
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517469ed4aa019e4ca233c28b03b872d
+      internalID: 1449688946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 285
+        width: 102
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6810b87c3ce26b343909439531eb6dc5
+      internalID: -346314655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 285
+        width: 101
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e709713675ba9f845acf4d46274bb026
+      internalID: 430010122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 113
+        width: 108
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eb8e126a47c28044b71d1f70689da1e
+      internalID: -1631422828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 211
+        width: 110
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91cf4fe7a4258534aa2c91135aaa39d3
+      internalID: -1378680976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_10
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 211
+        width: 111
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd5c366bf2aa8ac4d913d67411d56428
+      internalID: 678980022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_11
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 210
+        width: 109
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5e869a01e2b2a047899979812f3b6d1
+      internalID: -757344692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_12
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 119
+        width: 110
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74a9dc0277456f84a8d83d642b8c4b70
+      internalID: -820075572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 119
+        width: 111
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85efbbf000734584b84420f7e7f22ed4
+      internalID: 1571884425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_14
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 112
+        width: 97
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93764bc6ee9bc0048964ba5cc2c7bd70
+      internalID: 404466311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_15
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 104
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc9049bddcd289540ad953824727db53
+      internalID: 558345389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_16
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 2
+        width: 103
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5db93eda8bcc5b4f87f610a02317477
+      internalID: -484652894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_17
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 2
+        width: 102
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01f201ecda47041498668a67c7bcfbc8
+      internalID: -1929691796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_18
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 0
+        width: 104
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e134ee3ccb93948a9f31822fcf1859
+      internalID: -34571758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_0: -416835532
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_1: -2141513893
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_10: 678980022
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_11: -757344692
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_12: -820075572
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_13: 1571884425
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_14: 404466311
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_15: 558345389
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_16: -484652894
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_17: -1929691796
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_18: -34571758
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_2: -734518401
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_3: -512851460
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_4: 69697048
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_5: 1449688946
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_6: -346314655
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_7: 430010122
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_8: -1631422828
+      DALL_E_2024-06-21_23.30.37_-_A_variety_of_realistic_UI_buttons_styled_similarly_to_the_previously_provided_buttons._Include_versions_for__start____stop____exit____play____pause___-removebg-preview_9: -1378680976
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
