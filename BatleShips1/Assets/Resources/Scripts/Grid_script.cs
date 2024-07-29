@@ -83,8 +83,8 @@ public class Grid_script : MonoBehaviour
                 grid_list_enemy[x, y] = Instantiate(Cube, new Vector2(x + distanceBetweenGrids, y), Quaternion.identity);
                 grid_list_enemy[x, y].transform.SetParent(GameObject.Find("Grid").transform);
                 grid_list_enemy[x, y].GetComponent<Cube_script>().isEnemyBoard = true;
-                //grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 40;
-                grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 0;
+                grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 40;
+                //grid_list_enemy[x, y].GetComponent<SpriteRenderer>().sortingOrder = 0;
 
                 gameManager_script.ChangeTileColor(grid_list_enemy[x, y], gameManager_script.tileEnemyDefaultColor);
                 //AssignSpriteSliceToCube(grid_list_enemy[x, y] , x , y);
@@ -117,7 +117,6 @@ public class Grid_script : MonoBehaviour
 
         if (loadedSprite != null)
         {
-            //Debug.Log("Sprite loaded successfully: " + spriteName);
             cube.GetComponent<SpriteRenderer>().sprite = loadedSprite;
         }
         else
@@ -211,7 +210,6 @@ public class Grid_script : MonoBehaviour
             // if it is not inside grid
             else
             {
-                //Debug.Log("NOT INSIDE GRID...");
                 return false;
             }
         }
@@ -233,7 +231,6 @@ public class Grid_script : MonoBehaviour
             // if it is not inside grid
             else
             {
-                //Debug.Log("NOT INSIDE GRID...");
                 return false;
             }
         }
@@ -444,7 +441,6 @@ public class Grid_script : MonoBehaviour
     {
         for (int i = 0; i < shipAllPos.Length; i++)
         {
-            Debug.Log(shipAllPos[1] + "," + color1);
             grid_list_player[(int)shipAllPos[i].x, (int)shipAllPos[i].y].gameObject.GetComponent<SpriteRenderer>().color = color1;
         }
     }

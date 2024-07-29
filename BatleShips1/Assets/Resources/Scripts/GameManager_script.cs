@@ -59,8 +59,9 @@ public class GameManager_script : MonoBehaviour
     public bool playerIsIntersepting;
     public bool interseptionWasSuccess;
 
-    private int sateliteUseCount = 5;
-    private int airDefenseUseCount = 3;
+    private int sateliteUsePoint;
+    private int playerAirDefenseUsePoint; 
+    private int enemyAirDefenseUsePoint;
     public float rocketNormalSpeed;
     public float rocketInterseptionlSpeed;
 
@@ -73,7 +74,6 @@ public class GameManager_script : MonoBehaviour
     public Vector3 tileAirDefenseHoveringPermitColor = new Vector3(200f, 250f, 250f);
     public Vector3 tileAirDefenseHoveringDenyColor = new Vector3(240f, 200f, 200f);
     public Vector3 tileAirDefenseSetColor = new Vector3(215f, 255f, 220f);
-    
     public Vector3 tileEnemyDefaultColor = new Vector3(220, 220, 220);
 
 
@@ -81,10 +81,13 @@ public class GameManager_script : MonoBehaviour
     void Start()
     {
         rocketNormalSpeed = 10f;
-        rocketInterseptionlSpeed = 3f;
+        rocketInterseptionlSpeed = 6f;
+        sateliteUsePoint = 2;
+        playerAirDefenseUsePoint = 3;
+        enemyAirDefenseUsePoint = 3;
 
 
-    grid_script = Grid_obj.GetComponent<Grid_script>();
+        grid_script = Grid_obj.GetComponent<Grid_script>();
         //bullet_script = Bullet_obj.GetComponent<Bullet_script>();
         targetAnimObject = Instantiate(TargetAnim_obj, new Vector3(0, 0, 0), Quaternion.identity);
         targetAnimObject.SetActive(false);
@@ -92,8 +95,8 @@ public class GameManager_script : MonoBehaviour
 
         CreateGrid();
 
-        TextUpdate(airDefenseText, airDefenseUseCount.ToString());
-        TextUpdate(sateliteText, sateliteUseCount.ToString());
+        TextUpdate(airDefenseText, playerAirDefenseUsePoint.ToString());
+        TextUpdate(sateliteText, sateliteUsePoint.ToString());
 
         CreateShootingRangeList();
 
@@ -470,7 +473,7 @@ public class GameManager_script : MonoBehaviour
 
     public void SateliteClick()
     {
-        if (sateliteUseCount > 0)
+        if (sateliteUsePoint > 0)
         {
             sateliteIsWatching = true;
         }
@@ -498,14 +501,14 @@ public class GameManager_script : MonoBehaviour
                 tile.GetComponent<Cube_script>().RevealTile();
             }
 
-            sateliteUseCount -= 1;
-            TextUpdate(sateliteText , sateliteUseCount.ToString());
+            sateliteUsePoint -= 1;
+            TextUpdate(sateliteText , sateliteUsePoint.ToString());
         }
     }
 
     public void AirDefenseClick()
     {
-        if (airDefenseUseCount > 0)
+        if (playerAirDefenseUsePoint > 0)
         {
             settingUpAirDefense = true;
         }
@@ -518,11 +521,6 @@ public class GameManager_script : MonoBehaviour
     public void FinishAirDefenseDeploying()
     {
         settingUpAirDefense = false;
-    }
-
-    public void AirDefenseIsDestroyed()
-    {
-
     }
 
     public void SettingAirDefense(GameObject Ship, bool isHovering)
@@ -576,14 +574,16 @@ public class GameManager_script : MonoBehaviour
             {
                 if (CanDeployAirDefence(ship))
                 {
+
                     foreach (Vector2Int pos in ship.GetComponent<Ship_script>().shipAllAirDefensePos)
                     {
                         grid_script.grid_list_player[pos.x, pos.y].GetComponent<Cube_script>().CubeColorChange(tileAirDefenseSetColor);
                         grid_script.grid_list_player[pos.x, pos.y].GetComponent<Cube_script>().isUnderAirDefense = true;
+                        grid_script.grid_list_player[pos.x, pos.y].GetComponent<Cube_script>().airDefenseNumber += 1;
                     }
-                    airDefenseUseCount -= ship.GetComponent<Ship_script>().airDefenceNumber;
+                    playerAirDefenseUsePoint -= ship.GetComponent<Ship_script>().airDefenceNumber;
                     FinishAirDefenseDeploying();
-                    TextUpdate(airDefenseText, airDefenseUseCount.ToString());
+                    TextUpdate(airDefenseText, playerAirDefenseUsePoint.ToString());
                 }
             }
         }
@@ -591,27 +591,81 @@ public class GameManager_script : MonoBehaviour
         {
             if (CanDeployAirDefence(ship))
             {
+                ship.GetComponent<Ship_script>().airDiffenceIsActivated = true;
                 foreach (Vector2Int pos in ship.GetComponent<Ship_script>().shipAllAirDefensePos)
                 {
-                    grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().CubeColorChange(tileAirDefenseSetColor);
+                    //grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().CubeColorChange(tileAirDefenseSetColor);
                     grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().isUnderAirDefense = true;
+                    grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().airDefenseNumber += 1;
                 }
-                airDefenseUseCount -= ship.GetComponent<Ship_script>().airDefenceNumber;
+                enemyAirDefenseUsePoint -= ship.GetComponent<Ship_script>().airDefenceNumber;
                 FinishAirDefenseDeploying();
             }
         }
     }
 
+    public void AirDefenseIsDestroyed(GameObject ship)
+    {
+        foreach (Vector2Int pos in ship.GetComponent<Ship_script>().shipAllAirDefensePos)
+        {
+            if (ship.GetComponent<Ship_script>().isPlayer)
+            {
+                grid_script.grid_list_player[pos.x, pos.y].GetComponent<Cube_script>().airDefenseNumber -= 1;
+
+                if (grid_script.grid_list_player[pos.x, pos.y].GetComponent<Cube_script>().airDefenseNumber == 0)
+                {
+                    grid_script.grid_list_player[pos.x, pos.y].GetComponent<Cube_script>().CubeColorChange(tileDefaultColor);
+                    grid_script.grid_list_player[pos.x, pos.y].GetComponent<Cube_script>().isUnderAirDefense = false;
+                }
+                
+            }
+            else // Enemy ship
+            {
+                grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().airDefenseNumber -= 1;
+                if (grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().airDefenseNumber == 0)
+                {
+                    if (grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().isRevealed)
+                    {
+                        grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().CubeColorChange(tileDefaultColor);
+                    }
+                    else
+                    {
+                        grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().CubeColorChange(tileEnemyDefaultColor);
+                    }
+                    grid_script.grid_list_enemy[pos.x - DISTANCEBETWEENGRIDS, pos.y].GetComponent<Cube_script>().isUnderAirDefense = false;
+                }
+                
+            }
+            
+            
+        }
+    }
+
     public bool CanDeployAirDefence(GameObject ship)
     {
-        if ((airDefenseUseCount - ship.GetComponent<Ship_script>().airDefenceNumber) >= 0)
+        if (ship.GetComponent<Ship_script>().isPlayer)
         {
-            canDeployAirDefence = true;
+            if ((playerAirDefenseUsePoint - ship.GetComponent<Ship_script>().airDefenceNumber) >= 0)
+            {
+                canDeployAirDefence = true;
+            }
+            else
+            {
+                canDeployAirDefence = false;
+            }
         }
-        else
+        else // isEnemy ship
         {
-            canDeployAirDefence = false;
+            if ((enemyAirDefenseUsePoint - ship.GetComponent<Ship_script>().airDefenceNumber) >= 0)
+            {
+                canDeployAirDefence = true;
+            }
+            else
+            {
+                canDeployAirDefence = false;
+            }
         }
+        
         return canDeployAirDefence;
     }
 
@@ -634,7 +688,9 @@ public class GameManager_script : MonoBehaviour
     public void ShootRocket(GameObject VictimObj, GameObject HunterObject, bool AtackerIsPlayer, bool Interseption)
     {
         Vector2 bulletStartingPos;
-        bulletStartingPos = new Vector2(0, 0);
+        //bulletStartingPos = new Vector2(0, 0);
+       
+
         GameObject hunterObject = HunterObject;
 
         bulletIsInTheAir = true;
@@ -645,48 +701,50 @@ public class GameManager_script : MonoBehaviour
             {
                 if (hunterObject != null)
                 {
-                    rocketInterseptionlSpeed = RocketSpeedRandom(); // Temp - ramdomly accelerates interception rocket
+                    //rocketInterseptionlSpeed = RocketSpeedRandom(); // Temp - ramdomly accelerates interception rocket
 
-                    Vector3Int tempInterceptionStartingPos = new Vector3Int(0, 0, 0);
-                    if (Utility_script.random_num(0,2) == 1)
-                    { tempInterceptionStartingPos = new Vector3Int(0, 7, 0); }
+                    bulletStartingPos = BulletStartingPosCalculate(true);
+                    //Vector3Int tempInterceptionStartingPos = new Vector3Int(0, 0, 0);
+                    //if (Utility_script.random_num(0,2) == 1)
+                    //{ tempInterceptionStartingPos = new Vector3Int(0, 7, 0); }
+                    
 
-                    hunterObject = Instantiate(Bullet_obj, tempInterceptionStartingPos, Quaternion.identity); // from this Pos it is the most beautiful to watch interseption
+                    hunterObject = Instantiate(Bullet_obj, bulletStartingPos, Quaternion.identity); // from this Pos it is the most beautiful to watch interseption
                     hunterObject.GetComponent<Bullet_script>().interseptingRocket = true;
                     hunterObject.GetComponent<Bullet_script>().ShootRocket(VictimObj, rocketInterseptionlSpeed);
                 }
             }
             else // Player is just shooting
             {
+                bulletStartingPos = BulletStartingPosCalculate(true); // AtackerIsPlayer
+
                 hunterObject = Instantiate(Bullet_obj, new Vector3(bulletStartingPos.x, bulletStartingPos.y, 0), Quaternion.identity);
                 hunterObject.GetComponent<Bullet_script>().ShootRocket(VictimObj, rocketNormalSpeed);
 
 
                 GameObject victimObject = VictimObj; // Cube
                 TryInterseptRocket(victimObject, hunterObject, !AtackerIsPlayer);
-
             }
         }
         else //Enemy
         {
             if (Interseption)
             {
-                Debug.Log("Enemy is intersepting...");
+                //rocketInterseptionlSpeed = RocketSpeedRandom(); // Temp - ramdomly accelerates interception rocket
 
-                rocketInterseptionlSpeed = RocketSpeedRandom(); // Temp - ramdomly accelerates interception rocket
-
+                bulletStartingPos = BulletStartingPosCalculate(false);
                 Vector3Int tempInterceptionStartingPos = new Vector3Int(17, 0, 0);
                 if (Utility_script.random_num(0, 2) == 1)
                 { tempInterceptionStartingPos = new Vector3Int(17, 7, 0); }
 
-                hunterObject = Instantiate(Bullet_obj, tempInterceptionStartingPos, Quaternion.identity); // from this Pos it is the most beautiful to watch interseption
+                hunterObject = Instantiate(Bullet_obj, bulletStartingPos, Quaternion.identity); // from this Pos it is the most beautiful to watch interseption
                 hunterObject.GetComponent<Bullet_script>().interseptingRocket = true;
                 hunterObject.GetComponent<Bullet_script>().ShootRocket(VictimObj, rocketInterseptionlSpeed);
 
             }
             else // Enemy is just shooting
             {
-                bulletStartingPos = BulletStartingPosCalculate(AtackerIsPlayer);
+                bulletStartingPos = BulletStartingPosCalculate(false); // AtackerIsEnemy 
 
                 if (hunterObject == null)
                 {
@@ -695,7 +753,7 @@ public class GameManager_script : MonoBehaviour
                 GameObject victimObject = VictimObj; // Cube
                  hunterObject.GetComponent<Bullet_script>().ShootRocket(victimObject, rocketNormalSpeed);
 
-                TryInterseptRocket(victimObject, hunterObject, AtackerIsPlayer);
+                TryInterseptRocket(victimObject, hunterObject, !AtackerIsPlayer);
             }
             
         }
@@ -726,7 +784,6 @@ public class GameManager_script : MonoBehaviour
         int rocketInterseptionlSpeed = 0;
         int presentage = Utility_script.random_num(0, 100);
         
-        //Debug.Log("presentage = " + presentage);
         // Temp for random acceleration
         switch (presentage)
         {
@@ -794,25 +851,19 @@ public class GameManager_script : MonoBehaviour
 
     public Vector2Int BulletStartingPosCalculate(bool isPlayer)
     {
-        Vector2Int bulletStartingPos;
-        GameObject playerRandomShip = playerShips.transform.GetChild(Random.Range(0, playerShips.transform.childCount)).gameObject;
-        GameObject enemyRandomShip = enemyShips.transform.GetChild(Random.Range(0, enemyShips.transform.childCount)).gameObject;
+        Vector2Int tempBulletPos = Vector2Int.zero;
 
         if (isPlayer)
         {
-            Vector2Int tempBulletPos = (playerRandomShip.GetComponent<Ship_script>().shipAllPosArray[playerRandomShip.GetComponent<Ship_script>().shipAllPosArray.Length - 1]);
-            bulletStartingPos = tempBulletPos;
+            tempBulletPos = new Vector2Int(0, Random.Range(0, GRIDHEIGHT));         
         }
         else // Enemy
         {
-            Vector2Int tempBulletPos = new Vector2Int(Random.Range(GRIDWIDTH + DISTANCEBETWEENGRIDS , GRIDHEIGHT), Random.Range(0, 8));
-
-            bulletStartingPos = tempBulletPos;
+            //Vector2Int tempBulletPos = new Vector2Int(Random.Range(GRIDWIDTH + DISTANCEBETWEENGRIDS , GRIDHEIGHT), Random.Range(0, 8));
+            tempBulletPos = new Vector2Int(GRIDWIDTH + DISTANCEBETWEENGRIDS, Random.Range(0, 8));
         }
-        return bulletStartingPos;
+        return tempBulletPos;
     }
-
-    
 
     private Vector2Int calculateEnemyShootingPos()
     {
@@ -851,6 +902,9 @@ public class GameManager_script : MonoBehaviour
 
     public void PlayerShootsToEnemy(GameObject TargetCube)
     {
+        targetAnimObject.transform.position = TargetCube.transform.position;
+        targetAnimObject.SetActive(true);
+
         if (TargetCube.GetComponent<Cube_script>().wasShot == false && !bulletIsInTheAir)
         {
             ShootRocket(TargetCube, null, true, false); // Player ataks enemy manually - VictimObj, HunterObject, AtackerIsPlayer, Interseption
@@ -860,6 +914,7 @@ public class GameManager_script : MonoBehaviour
     public void PlayerHitOrMissTarget(GameObject Cube)
     {
         bulletIsInTheAir = false;
+        targetAnimObject.SetActive(false);
 
         if (Cube.GetComponent<Cube_script>().HitTheTarget())
         {
@@ -878,17 +933,17 @@ public class GameManager_script : MonoBehaviour
             Cube.GetComponent<Cube_script>().RevealTile();
             InstantiateHitMissAnimation(Cube.transform.position, false);
 
-            if (!pause)
+            if (!pause && !gameOver)
             {
-                StartCoroutine(EnemyShootsToPlayer());
+                StartCoroutine(EnemyShootsToPlayer()); // After player missed, enemy shoots
             }
-            
         }
     }
 
     private IEnumerator EnemyShootsToPlayer()
     {
         Vector2Int shootPos = calculateEnemyShootingPos();
+
         targetAnimObject.transform.position = new Vector3(shootPos.x, shootPos.y, 0); ;
         targetAnimObject.SetActive(true);
 
@@ -925,7 +980,7 @@ public class GameManager_script : MonoBehaviour
             RemoveShootingPos(shootPos);
 
             targetAnimObject.SetActive(false);
-            if (!pause)
+            if (!pause && !gameOver)
             {
                 StartCoroutine(EnemyShootsToPlayer()); // Continue enemy's turn if it hits
             }

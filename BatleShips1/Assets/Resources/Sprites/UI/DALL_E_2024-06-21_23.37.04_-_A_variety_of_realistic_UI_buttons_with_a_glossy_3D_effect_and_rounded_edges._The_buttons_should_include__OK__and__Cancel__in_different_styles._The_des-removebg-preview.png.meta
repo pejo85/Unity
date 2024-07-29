@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 360
+        width: 109
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca690fcd6a4826b4fb36a3a03e5bd979
+      internalID: 283967338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 360
+        width: 108
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5783981359e5dd469c22fb4ab9477f8
+      internalID: 189512228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 359
+        width: 112
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d64685c0826501418769b3af8579437
+      internalID: -2040366237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 359
+        width: 110
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7174245928b962f43aa5fca955c3ed40
+      internalID: -442713621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 254
+        width: 102
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e25a23e9574c1db418ce5f94d0457938
+      internalID: 15084803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 255
+        width: 104
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57ad74e1fbee16145be4c003be167f79
+      internalID: 108487052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 256
+        width: 110
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7643a88b6fe7c2644bad466b58d4a46d
+      internalID: -2051877572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 255
+        width: 108
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68852efd460793749a9519f8cbc008d0
+      internalID: -921293645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 136
+        width: 103
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3a014c3926ff247b0d35f802833523
+      internalID: -1958933203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 136
+        width: 104
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a151392a8af43bf48b223d82e136ac9e
+      internalID: -839109220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_10
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 132
+        width: 110
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e19a7dfb49def32459d2f83773b58fe8
+      internalID: -896947260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_11
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 13
+        width: 111
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e6455b87dee7c8469ee1eb6e80fe699
+      internalID: -930106900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 14
+        width: 109
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f372a370bdce6459799e7aba775c91
+      internalID: -371570832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 23
+        width: 236
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9927678c120618b47b31e128f6866ff3
+      internalID: 694543784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +426,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_0: 283967338
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_1: 189512228
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_10: -896947260
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_11: -930106900
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_12: -371570832
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_13: 694543784
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_2: -2040366237
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_3: -442713621
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_4: 15084803
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_5: 108487052
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_6: -2051877572
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_7: -921293645
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_8: -1958933203
+      DALL_E_2024-06-21_23.37.04_-_A_variety_of_realistic_UI_buttons_with_a_glossy_3D_effect_and_rounded_edges._The_buttons_should_include__OK__and__Cancel__in_different_styles._The_des-removebg-preview_9: -839109220
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

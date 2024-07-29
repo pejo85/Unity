@@ -19,6 +19,8 @@ public class Cube_script : MonoBehaviour
     public bool isUnderAirDefense;
     public bool wasShot;
 
+    public int airDefenseNumber = 0;
+
     [SerializeField] private bool gameStarted;
 
     private Vector3 tileDefaultColor;
@@ -141,7 +143,7 @@ public class Cube_script : MonoBehaviour
 
     public bool PlayerCanShoot()
     {
-        return mouseIsClicked && isEnemyBoard && !gameManager_script.sateliteIsWatching && !gameManager_script.pause;
+        return mouseIsClicked && isEnemyBoard && !gameManager_script.sateliteIsWatching && !gameManager_script.pause && !gameManager_script.gameOver;
     }
 
     public void CubeColorChange(Color color)

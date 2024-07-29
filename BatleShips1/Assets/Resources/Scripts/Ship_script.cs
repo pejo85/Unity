@@ -424,7 +424,6 @@ public class Ship_script : MonoBehaviour
 
         else if (mouseIsClickedOnShip && shipCanRotate)
         {
-            Debug.Log("Rolback rotation");
             rollbackShipPos = true;
 
             ChangeShipOrientation();
@@ -508,6 +507,11 @@ public class Ship_script : MonoBehaviour
             decorShip.GetComponent<SpriteRenderer>().color = Color.black;
             decorShip.transform.GetChild(0).gameObject.SetActive(true);
         }
+        if (airDiffenceIsActivated)
+        {
+            gameManager_script.AirDefenseIsDestroyed(this.gameObject);
+        }
+
         this.transform.SetParent(GameObject.Find("DestroyedShips").transform);
     }
 
